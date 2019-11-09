@@ -1,0 +1,181 @@
+.sorting tr:not(.home) {
+    cursor: pointer;
+}
+
+.ui-state-highlight {
+    border: 1px dashed #ccc;
+}
+
+#imgPreview {
+  margin: 20px;
+}
+
+#noimage {
+  width: 80px;
+  height: 80px;
+}
+
+ul.gallery {
+  padding: 0;
+}
+
+
+
+ul.gallery li {
+  margin: 20px;
+  display: inline-block;
+  list-style: none;
+}
+
+body {
+    padding-top: 56px;
+  }
+  
+  
+  /*
+   * Global add-ons
+   */
+  
+  .sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /*
+   * Top navigation
+   * Hide default border to remove 1px line.
+   */
+  .navbar-fixed-top {
+    border: 0;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+      position: fixed;
+      top: 47px;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      display: block;
+      padding: 20px;
+      overflow-x: hidden;
+      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+      background-color: #222;
+      border-right: 1px solid #eee;
+  }
+
+
+
+  @media (max-width: 500px) {
+    .sidebar {
+      position: relative;
+      top: 0;
+      background-color: rgb(230, 230, 230);
+      text-align: center;
+      background-size: cover;
+      padding: 0;
+      border-radius: 5px;
+    }
+
+    .nav-sidebar {
+      display: inline-block;
+      padding: 25px;
+    } 
+
+    .mobile-disable {
+      display: none;
+    }
+
+    .nav-sidebar > li > a {
+
+      background-color: #00111f;
+      margin: 4px;
+      border-radius: 5px;
+    } 
+
+    .nav-sidebar > li > a:hover {
+      color: rgb(255, 255, 255) !important;
+      background-color: #00111f !important;
+    }
+  }
+  
+  /* Sidebar navigation */
+  .nav-sidebar {
+    margin-right: -21px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+  }
+  .nav-sidebar > li > a {
+
+    color: rgb(235, 235, 235);
+    padding-right: 10px;
+    padding-left: 20px;
+  } 
+
+  .nav-sidebar > li > a:hover {
+    color: rgb(255, 255, 255);
+    background-color: #00111f;
+  }
+  
+  
+  /*
+   * Main content
+   */
+  
+  /* .main {
+    
+    padding-right: 40px;
+    padding-left: 40px;
+  } */
+  @media (max-width: 768px) {
+    .main {
+      padding-right: 40px;
+      padding-left: 40px;
+      margin-left: 150px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .main {
+      margin-left: 0px;
+    }
+  }
+
+  .main  {
+    margin-top: 10px;
+  }
+
+  .page-header {
+    margin: 6px;
+    display: block;
+  }
+
+  .alert {
+    margin: 0 !important;
+    padding: 10px !important;
+    margin-top: 8px !important;
+    font-size: 11px !important;
+  }
+  
+  
+  /*
+   * Placeholder dashboard ideas
+   */
+  
+  .placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .placeholders h4 {
+    margin-bottom: 0;
+  }
+  .placeholder {
+    margin-bottom: 20px;
+  }
+  .placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+  }

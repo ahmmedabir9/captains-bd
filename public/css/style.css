@@ -1,0 +1,48 @@
+.brand-img {
+    max-width: 90px;
+}
+
+
+
+
+.section-header {
+    margin: 60px 0px;
+    text-align: center;
+}
+
+.c-slide {
+    height: max-content;
+}
+
+.thumb-text {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.thumb-text p {
+    text-align: center;
+    padding-top: 5px;
+    margin-left: 15px;
+}
+
+.thumb-text h3 {
+    margin-top: 0;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .c-slide {
+        margin-top: 45px;
+        font-size: 20px;
+    }
+    .c-slide p {
+        display: none;
+    }
+}
+
+/* @media only screen and (max-width: 1000px) {
+    .c-slide {
+        height: max-content;
+    }
+} */
