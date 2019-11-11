@@ -12,6 +12,7 @@
 
 .c-slide {
     height: max-content;
+    margin-top: 58px;
 }
 
 .thumb-text {
@@ -29,12 +30,56 @@
     margin-top: 0;
 }
 
+img.pimage {
+    width: 180px;
+}
+
+a.pa {
+    display: inline-block;
+    height: 200px;
+}
+
+.row-products .p {
+    margin: 20px 0;
+}
+
+img.spi {
+    width: 100%;
+}
+
+ul.gallery li {
+    display: inline-block;
+    margin: 20px;
+    list-style: none;
+}
+
+.navbar {
+    border-radius: 0px !important;
+    margin-bottom: 0px !important;
+    border: none !important;
+    min-height: 60px !important;
+}
+
+.nav {
+
+    min-height: 60px !important;
+    background-color: #fafafa !important;
+}
+
+.nav li a {
+
+    padding: 20px 10px;
+}
+
+.navbar-toggle {
+    margin-top: 12px !important;
+}
 
 
 @media only screen and (max-width: 600px) {
     .c-slide {
-        margin-top: 45px;
-        font-size: 20px;
+        margin-top: 58px;
+        font-size: 15px;
     }
     .c-slide p {
         display: none;

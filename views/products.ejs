@@ -1,0 +1,37 @@
+<% include _layouts/header %>
+
+<div class="container c-slide">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+      <h3>Categories</h3>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="/products">All Products</a></li>
+        <% categories.forEach(function(c) { %>
+        <li class="list-group-item"><a href="/products/<%= c.slug %>"><%= c.title %></a></li>
+        <% }); %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-md-8">
+      <div class="row-products">
+
+        <% products.forEach(function(p) { %>
+        <div class="col-xs-12 col-md-4 p">
+          <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
+            <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="pimage">
+          </a>
+          <h3><%= p.title %></h3>
+          <h4><%= p.price %></h4>
+          <a href="/products/<%= p.category %>/<%= p.slug %>" class="vd">View Details</a>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<% include _layouts/footer %>

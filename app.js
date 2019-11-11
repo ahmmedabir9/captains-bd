@@ -33,6 +33,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set Global Error Variables
 app.locals.errors = null;
 
+//Get Page Models
+var Category = require('./models/category');
+
+//Get Categories
+Category.find(function (err, categories) {
+  if (err)  console.log(err);
+
+  else {
+    app.locals.categories = categories;
+  }
+  
+}); 
+
 
 //Express File Upload Middleware
 app.use(fileUpload());
@@ -99,6 +112,7 @@ app.use(function (req, res, next) {
 
 // set routes
 var pages = require('./routes/pages.js');
+var products = require('./routes/products.js');
 var adminPages = require('./routes/admin_pages.js');
 var adminCategories = require('./routes/admin_categories.js');
 var adminDashboard = require('./routes/admin_dashboard.js');
@@ -109,6 +123,7 @@ app.use('/admin/categories', adminCategories);
 app.use('/admin/', adminDashboard);
 app.use('/admin/products', adminProducts);
 app.use('/', pages);
+app.use('/products', products);
 
 //start the server
 var port = 3000;

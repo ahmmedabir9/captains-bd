@@ -4,11 +4,11 @@ var router = express.Router();
 // Get Page index
 
 router.get('/', function (req, res) {
-    Page.find({}).exec(function (err, pages) {
+    Page.find({}).sort({sorting: 1}).exec(function (err, pages) {
         res.render('admin/pages', {
             pages: pages
         });
-    });
+    }); 
 });
 
 
