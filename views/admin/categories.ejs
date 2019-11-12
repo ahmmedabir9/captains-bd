@@ -2,30 +2,32 @@
 
 
 
-<h1 class="page-header">Categories <a href="/admin/categories/add-category" class="btn btn-sm btn-info">Add a new Category</a></h1>
+<h1 class="page-header">Categories <a href="/admin/categories/add-category" class="btn btn-sm btn-info">Add a new
+        Category</a></h1>
 
+<div class="table-responsive">
+    <table class="table table-striped">
 
-<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(function(cat) { %>
+            <tr>
+                <td><%= cat.title %></td>
+                <td><a class="btn btn-xs btn-primary" href="/admin/categories/edit-category/<%= cat.id %>">Edit</a></td>
+                <td><a class="confirmDeletion btn btn-xs btn-danger"
+                        href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
 
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% categories.forEach(function(cat) { %>
-        <tr>
-            <td><%= cat.title %></td>
-            <td><a class="btn btn-xs btn-primary" href="/admin/categories/edit-category/<%= cat.id %>">Edit</a></td>
-            <td><a class="confirmDeletion btn btn-xs btn-danger" href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
+            </tr>
+            <% }); %>
+        </tbody>
 
-        </tr>
-        <% }); %>
-    </tbody>
-
-</table>
+    </table>
 
 
 </div>

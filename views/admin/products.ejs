@@ -2,10 +2,11 @@
 
 <h1 class="page-header">Products <a href="/admin/products/add-product" class="btn btn-sm btn-info">Add a new Product</a>
 </h1>
-    <br><br>
+<br><br>
 
-    <% if (count>0) { %>
+<% if (count>0) { %>
 
+<div class="table-responsive">
     <table class="table table-striped">
 
         <thead>
@@ -31,18 +32,21 @@
                     <img id="noimage" src="/productImages/<%= product._id %>/<%= product.image %>" alt="Product Image">
                     <% } %>
                 </td>
-                <td><a class="btn btn-xs btn-primary" href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
-                <td><a class="confirmDeletion btn btn-xs btn-danger" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
+                <td><a class="btn btn-xs btn-primary" href="/admin/products/edit-product/<%= product._id %>">Edit</a>
+                </td>
+                <td><a class="confirmDeletion btn btn-xs btn-danger"
+                        href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
             </tr>
             <% }); %>
         </tbody>
 
     </table>
+</div>
 
 
-    <% } else { %>
-    <h3 class="text-center">There are no Products.</h3>
-    <% } %>
+<% } else { %>
+<h3 class="text-center">There are no Products.</h3>
+<% } %>
 
 
-    <%- include('../_layouts/adminfooter') %>
+<%- include('../_layouts/adminfooter') %>

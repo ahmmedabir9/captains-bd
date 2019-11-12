@@ -1,0 +1,79 @@
+<% include _layouts/header %>
+
+<% if (typeof cart != "undefined") { %>
+<div class="container c-slide">
+
+  <ol class="breadcrumb" style="margin-top: 15px;">
+    <li><a href="/">Home</a></li>
+    <li class="active">Checkout</li>
+  </ol>
+
+  <h1 class="page-header">My Cart</h1>
+  <br>
+
+
+  <div class="table-responsive">
+    <table class="table alignmiddle">
+      <tr>
+        <th>Images</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+        <th>Total</th>
+      </tr>
+      <% var total = 0; %>
+      <% cart.forEach(function(product) { %>
+      <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+      <% total += +sub %>
+      <tr>
+        <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
+        <td><%= product.title %></td>
+        <td><%= product.price %></td>
+        <td><%= product.qty %></td>
+        <td>
+          <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
+          <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=add">+</a>
+
+          <a class="btn btn-xs btn-danger" href="/cart/update/<%= product.title %>?action=clear">Clear</a>
+        </td>
+        <td><%= sub %></td>
+      </tr>
+
+      <% }); %>
+      <tr>
+        <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %></td>
+      </tr>
+      <tr>
+        <td colspan="5" align="right">
+          <a href="/cart/clear" class="btn btn-danger clearcart">Clear Cart</a>
+        </td>
+        <td colspan="6" align="right">
+          <a href="#" class="btn btn-primary buynow">Buy Now</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<% } else { %>
+
+<div class="section c-slide hero-image">
+  <div class="hero-text">
+    <h1 style="font-size:60px">Your Cart is Empty!</h1>
+  </div>
+</div>
+<% } %>
+
+
+<script>
+  $(function (params) {
+    $('a.clearcart').on('click', function () {
+      if (!confirm('Confirm Clear Cart'))
+        return false;
+    });
+  });
+</script>
+
+
+<% include _layouts/footer %>

@@ -110,9 +110,17 @@ app.use(function (req, res, next) {
 });
 
 
+
+app.get('*', function (req, res, next) {
+  res.locals.cart = req.session.cart;
+  next();
+});
+
+
 // set routes
 var pages = require('./routes/pages.js');
 var products = require('./routes/products.js');
+var cart = require('./routes/cart.js');
 var adminPages = require('./routes/admin_pages.js');
 var adminCategories = require('./routes/admin_categories.js');
 var adminDashboard = require('./routes/admin_dashboard.js');
@@ -124,6 +132,7 @@ app.use('/admin/', adminDashboard);
 app.use('/admin/products', adminProducts);
 app.use('/', pages);
 app.use('/products', products);
+app.use('/cart', cart);
 
 //start the server
 var port = 3000;

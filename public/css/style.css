@@ -3,7 +3,13 @@
 }
 
 
+body {
+    background-color: rgb(255, 255, 255);
+}
 
+table.alignmiddle td {
+    vertical-align: middle !important;
+}
 
 .section-header {
     margin: 60px 0px;
@@ -17,18 +23,85 @@
 
 .thumb-text {
     text-align: center;
-    padding-bottom: 20px;
+    padding: 0 0 10px 0 !important;
+    height: 100%;
 }
 
-.thumb-text p {
-    text-align: center;
-    padding-top: 5px;
-    margin-left: 15px;
+.inner {
+    overflow: hidden;
+}
+
+.inner img {
+    transition: all 0.8s ease;
+}
+
+.inner:hover img {
+    transform: scale(1.2);
 }
 
 .thumb-text h3 {
+    font-size: 20px;
+    text-overflow: ellipsis;
+    margin-top: 8px;
+}
+
+.thumb-text h4 {
+    font-size: 15px;
     margin-top: 0;
 }
+
+.thumb-text:hover {
+    box-shadow: 0px 4px 6px #888888;
+    transform: scale(1.03);
+    
+}
+
+.p-card {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.sidemenu {
+    margin-top: 50px;
+}
+
+.sidemenu h3 {
+    text-align: center;
+}
+
+.hero-image {
+    background-image: url("/images/empty-cart.png");
+    background-color: #cccccc;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+  }
+.caption {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 !important;
+}
+
+.card-img-top {
+    width: 100%;
+}
+
 
 img.pimage {
     width: 180px;
@@ -39,18 +112,23 @@ a.pa {
     height: 200px;
 }
 
-.row-products .p {
-    margin: 20px 0;
-}
+
+
 
 img.spi {
     width: 100%;
 }
 
+ul.gallery {
+    margin-left: 0;
+    padding-inline-start: 0px;
+}
+
 ul.gallery li {
     display: inline-block;
-    margin: 20px;
+    margin: 10px;
     list-style: none;
+    
 }
 
 .navbar {
@@ -58,12 +136,14 @@ ul.gallery li {
     margin-bottom: 0px !important;
     border: none !important;
     min-height: 60px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0px 4px 6px #888888;
 }
 
 .nav {
 
     min-height: 60px !important;
-    background-color: #fafafa !important;
+    background-color: #ffffff !important;
 }
 
 .nav li a {
@@ -76,13 +156,27 @@ ul.gallery li {
 }
 
 
+.p {
+    border-left: 1px solid #eee;
+    background-color: #fff;
+}
+
+.page-header {
+    margin-top: 20px;
+}
+
+.btn-group-vertical {
+    width: 100%;
+}
+
+.btn-group-vertical>.btn {
+    border-radius: 0 !important;
+}
+
 @media only screen and (max-width: 600px) {
     .c-slide {
         margin-top: 58px;
         font-size: 15px;
-    }
-    .c-slide p {
-        display: none;
     }
 }
 
