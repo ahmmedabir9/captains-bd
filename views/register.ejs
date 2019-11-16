@@ -1,40 +1,43 @@
 <% include _layouts/header %>
 
-<div class="container c-slide">
-  <h1 class="page-header"><%= title %><a href="/admin/products" class="btn btn-sm btn-info">Back to all Products</a>
+<div class="container form-signin">
+  <h1 class="page-header"><%= title %>
   </h1>
 
-  <br><br>
 
   <form method="post" action="/users/register">
 
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" class="form-control" name="name" placeholder="Name">
+      <input type="text" class="form-control" name="name" placeholder="Name" required>
     </div>
 
     <div class="form-group">
       <label for="">Email</label>
-      <input type="text" class="form-control" name="email" placeholder="Email">
+      <input type="text" class="form-control" name="email" placeholder="Email" required>
     </div>
 
     <div class="form-group">
       <label for="">Username</label>
-      <input type="text" class="form-control" name="username" placeholder="Username">
+      <input type="text" class="form-control" name="username" placeholder="Username" required>
     </div>
 
     <div class="form-group">
       <label for="">Password</label>
-      <input type="password" class="form-control" name="password" placeholder="Password">
+      <input type="password" class="form-control" name="password" placeholder="Password" required>
     </div>
 
     <div class="form-group">
       <label for="">Confirm Password</label>
-      <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+      <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
     </div>
 
 
-    <button class="btn btn-default">Submit</button>
+    <button class="btn btn-info btn-block">Sign Up</button>
+
+
+    <p class="simple-link">Already Have an Account? <a href="/users/login">Sign in</a></p>
+
 
   </form>
 </div>

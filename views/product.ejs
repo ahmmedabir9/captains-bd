@@ -5,12 +5,12 @@
 
 <div class="container c-slide">
 
-  <ol class="breadcrumb" style="margin-top: 15px;">
+  <ol class="breadcrumb" style="margin: 15px;">
     <li><a href="/">Home</a></li>
     <li><a href="/products">Products</a></li>
     <li class="active"><%= p.title %></li>
   </ol>
-  <div class="row">
+  <div class="container row">
     <div class="col-xs-12 col-md-3 sidemenu">
 
       <h3>Categories</h3>
@@ -26,16 +26,26 @@
     <div class="col-xs-12 col-md-9 p">
 
 
-      <h1 class="page-header"><%= p.title %></h1>
+
       <div class="col-xs-12 col-md-7">
-        <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="spi">
+        <div class="pimg">
+          <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="spi">
+        </div>
         <br>
+
       </div>
 
       <div class="col-xs-12 col-md-5">
+        <h3 class="page-header product-header"><%= p.title %></h3>
+        <p><%= p.category %></p>
         <p><%= p.desc %></p>
         <p><b>Price: </b><%= parseFloat(p.price).toFixed(2) %><b>৳</b></p>
-        <p><a class="btn btn-sm btn-info" href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
+        <p><select name="category" class="form-control">
+            <% categories.forEach(function(cat) { %>
+            <option value="<%= cat.slug %>"><%= cat.title %></option>
+            <% }); %></p>
+        <p>
+          </select><input class="form-control qty-input" maxlength="4" size="4" type="text" name="qty" id="" placeholder="Quantity" value="1"> <a class="btn btn-sm btn-info btn-block" href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
       </div>
 
       <div class="col-xs-12 col-md-12">
@@ -44,7 +54,7 @@
           <% if (image != "thumbs") { %>
           <li>
             <a data-fancybox="gallery" href="/productImages/<%= p.id %>/gallery/<%= image %>">
-              <img src="/productImages/<%= p.id %>/gallery/thumbs/<%= image %>" alt="">
+              <img class="gimg" src="/productImages/<%= p.id %>/gallery/thumbs/<%= image %>" alt="">
             </a>
           </li>
           <% } %>
@@ -56,6 +66,8 @@
 
     </div>
   </div>
+
+  
 
 
 </div>

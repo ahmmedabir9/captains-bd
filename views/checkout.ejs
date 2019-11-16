@@ -1,59 +1,151 @@
 <% include _layouts/header %>
 
+
 <% if (typeof cart != "undefined") { %>
-<div class="container c-slide">
+<div class="container" style="margin-bottom: 20px;">
 
   <ol class="breadcrumb" style="margin-top: 15px;">
     <li><a href="/">Home</a></li>
     <li class="active">Checkout</li>
   </ol>
+  <div class="row">
+    <div class="col-md-6 order-md-2 mb-4">
 
-  <h1 class="page-header">My Cart</h1>
-  <br>
+      <h2 class="page-header">My Cart</h2>
+      <br>
+      <div class="table-responsive">
+        <table class="table alignmiddle">
+          <tr>
+            <th>Images</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Total</th>
+          </tr>
+          <% var total = 0; %>
+
+          <% cart.forEach(function(product) { %>
+          <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+          <% total += +sub %>
+          <tr>
+            <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td><%= product.qty %></td>
+            <td>
+              <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
+              <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=add">+</a>
+
+              <a class="btn btn-xs btn-danger" href="/cart/update/<%= product.title %>?action=clear">Clear</a>
+            </td>
+            <td><%= sub %></td>
+          </tr>
+
+          <% }); %>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %></td>
+
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Shipping Cost: </b><%= parseFloat(shipping_cost).toFixed(2) %></td>
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Discount: </b>0</td>
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+              <a href="/cart/clear" class="btn btn-danger btn-sm clearcart">Clear Cart</a>
+            </td>
+            <td colspan="6" align="right"><b>Subtotal: </b><%= parseFloat(total+shipping_cost).toFixed(2) %></td>
+
+        </table>
 
 
-  <div class="table-responsive">
-    <table class="table alignmiddle">
-      <tr>
-        <th>Images</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-        <th>Total</th>
-      </tr>
-      <% var total = 0; %>
-      <% cart.forEach(function(product) { %>
-      <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
-      <% total += +sub %>
-      <tr>
-        <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
-        <td><%= product.title %></td>
-        <td><%= product.price %></td>
-        <td><%= product.qty %></td>
-        <td>
-          <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
-          <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=add">+</a>
+        <form action="" method="post">
+          <div class="input-group">
 
-          <a class="btn btn-xs btn-danger" href="/cart/update/<%= product.title %>?action=clear">Clear</a>
-        </td>
-        <td><%= sub %></td>
-      </tr>
+            <input type="text" class="form-control" placeholder="Insert Your Coupon">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button">Apply Coupon</button>
+            </span>
+          </div>
 
-      <% }); %>
-      <tr>
-        <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %></td>
-      </tr>
-      <tr>
-        <td colspan="5" align="right">
-          <a href="/cart/clear" class="btn btn-danger clearcart">Clear Cart</a>
-        </td>
-        <td colspan="6" align="right">
-          <a href="#" class="btn btn-primary buynow">Buy Now</a>
-        </td>
-      </tr>
-    </table>
+        </form>
+
+    </div>
+
+
+
   </div>
+  <div class="col-md-6 order-md-1">
+    <h4 class="page-header">Billing Details</h4>
+    <form method="post" action="/cart/checkout" enctype="multipart/form-data">
+
+
+      <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Name" <% if (user) { %> value=<%= user.name %>
+          <% } %> required>
+      </div>
+
+
+      <div class="form-group">
+        <label for="">Email Address</label>
+        <input type="text" class="form-control" name="email" placeholder="Email Address" <% if (user) { %>
+          value=<%= user.email %> <% } %> required>
+      </div>
+
+      <div class="form-group">
+        <label for="">Mobile Number</label>
+        <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="">District</label>
+        <select class="" name="district" required>
+          <option value="dhaka">Dhaka</option>
+          <option value="other">Others</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="">Shipping Address</label>
+        <textarea name="address" class="form-control" rows="5" placeholder="Shipping Address"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="">Payment Method</label>
+        <div class="custom-control custom-radio">
+          <input id="onDelivery" name="payment_method" value="onDelivery" type="radio" class="custom-control-input"
+            required checked>
+          <label class="custom-control-label" for="debit">Cash on Delivery</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="bkash" name="payment_method" value="bkash" type="radio" class="custom-control-input" required>
+          <label class="custom-control-label" for=>Bkash</label>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label for="">Delivery Note</label>
+        <textarea name="note" class="form-control" rows="10" placeholder="Delivery Note"></textarea>
+      </div>
+
+      <input type="hidden" name="amount" value="<%= total %>">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
+    </form>
+  </div>
+</div>
 </div>
 
 <% } else { %>
@@ -61,6 +153,7 @@
 <div class="section c-slide hero-image">
   <div class="hero-text">
     <h1 style="font-size:60px">Your Cart is Empty!</h1>
+    <a href="/products" class="btn btn-info btn-block">Shop Now</a>
   </div>
 </div>
 <% } %>

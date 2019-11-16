@@ -35,7 +35,8 @@ router.post('/register', function (req, res) {
     if (errors) {
         res.render('register', {
             errors: errors,
-            title: 'Register'
+            title: 'Register',
+            user: null
         });
 
     }
@@ -56,7 +57,7 @@ router.post('/register', function (req, res) {
                     email: email,
                     username: username,
                     password: password,
-                    admin: 1
+                    admin: 0
                 });
 
                 bcrypt.genSalt(10, function (err, salt) {
@@ -80,6 +81,35 @@ router.post('/register', function (req, res) {
             }
         });
     }
+});
+
+//Get Login
+router.get('/login', function (req, res) {
+
+    if(res.locals.user) res.redirect('/');
+
+    res.render('login', {
+        title: 'Log in'
+    });
+});
+
+//Post Login
+router.post('/login', function (req, res, next) {
+
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+//Get Logout
+router.get('/logout', function (req, res, next) {
+
+    req.logout();
+
+    req.flash('success', 'You are logged out!');
+    res.redirect('/users/login');
 });
 
 //exports

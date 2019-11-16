@@ -129,19 +129,23 @@ var pages = require('./routes/pages.js');
 var products = require('./routes/products.js');
 var cart = require('./routes/cart.js');
 var users = require('./routes/users.js');
+var orders = require('./routes/orders.js');
 var adminPages = require('./routes/admin_pages.js');
 var adminCategories = require('./routes/admin_categories.js');
 var adminDashboard = require('./routes/admin_dashboard.js');
 var adminProducts = require('./routes/admin_products.js');
+var adminOrders = require('./routes/admin_orders.js');
 
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/', adminDashboard);
 app.use('/admin/products', adminProducts);
+app.use('/admin/orders', adminOrders);
 app.use('/', pages);
 app.use('/users', users);
 app.use('/products', products);
 app.use('/cart', cart);
+app.use('/orders', orders);
 
 //start the server
 var port = 3000;

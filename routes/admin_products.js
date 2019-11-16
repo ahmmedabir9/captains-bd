@@ -3,6 +3,8 @@ var router = express.Router();
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
 var resizeImg = require('resize-img');
+var auth = require('../config/auth');
+var isAdmin = auth.isAdmin;
 
 
 //Product Models
@@ -13,7 +15,7 @@ var Category = require('../models/category');
 
 // Get Product index
 
-router.get('/', function (req, res) {
+router.get('/', isAdmin, function (req, res) {
     var count;
 
     Product.count(function (err, c) {
@@ -38,11 +40,12 @@ router.get('/', function (req, res) {
 
 
 
-router.get('/add-product', function (req, res) {
+router.get('/add-product', isAdmin, function (req, res) {
 
     var title = "";
     var desc = "";
     var price = "";
+
 
     Category.find(function (err, categories) {
         res.render('admin/add_product', {
@@ -110,6 +113,7 @@ router.post('/add-product', function (req, res) {
                     desc: desc,
                     price: price2,
                     category: category,
+                    featured: 0,
                     image: imageFile
                 });
 
@@ -158,7 +162,7 @@ router.post('/add-product', function (req, res) {
 
 
 
-router.get('/edit-product/:id', function (req, res) {
+router.get('/edit-product/:id', isAdmin, function (req, res) {
 
     var errors;
 
@@ -190,6 +194,7 @@ router.get('/edit-product/:id', function (req, res) {
                             category: p.category.replace(/\s+/g, '-').toLowerCase(),
                             price: parseFloat(p.price).toFixed(2),
                             image: p.image,
+                            featured: p.featured,
                             galleryImages: galleryImages,
                             id: p._id
                         });
@@ -222,6 +227,7 @@ router.post('/edit-product/:id', function (req, res) {
     var category = req.body.category;
     var pimage = req.body.pimage;
     var id = req.params.id;
+    var featured = req.body.featured;
 
     var errors = req.validationErrors();
 
@@ -253,6 +259,7 @@ router.post('/edit-product/:id', function (req, res) {
                     p.desc = desc;
                     p.price = parseFloat(price).toFixed(2);
                     p.category = category;
+                    p.featured = featured;
 
                     if (imageFile != "") {
                         p.image = imageFile;
@@ -321,7 +328,7 @@ router.post('/product-gallery/:id', function (req, res) {
 
 // Get Delete Product
 
-router.get('/delete-product/:id', function (req, res) {
+router.get('/delete-product/:id', isAdmin, function (req, res) {
     var id = req.params.id;
     var path = 'public/productImages/' + id;
 
@@ -343,7 +350,7 @@ router.get('/delete-product/:id', function (req, res) {
 
 // Get Delete Image
 
-router.get('/delete-image/:image', function (req, res) {
+router.get('/delete-image/:image', isAdmin, function (req, res) {
     var originalImage = 'public/productImages/' + req.query.id + '/gallery/' + req.params.image;
     var thumbImage = 'public/productImages/' + req.query.id + '/gallery/thumbs' + req.params.image;
 

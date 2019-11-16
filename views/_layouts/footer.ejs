@@ -1,49 +1,54 @@
-<div class="section" style="background-color: rgb(240, 240, 240);">
-  <div class="container">
+<div class="section" style="background-color: #eee;">
+  <div class="container" style="padding-bottom: 10px;">
     <!-- Example row of columns -->
     <div class="row">
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      
+      <div class="col-md-4 col-sm-4 col-xs-6 mobile-disable">
+        <div class="footer-widget">
+          <h3>Categories</h3>
+          <div class="footer-widget-content">
+            <% categories.forEach(function(c) { %>
+            <a class="contact-link" href="/products/<%= c.slug %>"><%= c.title %></a>
+            <% }); %>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="footer-widget">
+          <h3>Quick Links</h3>
+          <div class="footer-widget-content">
+            <a class="contact-link" href="/cart/checkout">My Cart</a>
+            <a class="contact-link" href="/users/account">My Account</a>
+            <a class="contact-link" href="/about">About us</a>
+            <a class="contact-link" href="/contact">Contact</a>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-          felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-          massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-          felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-          massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
+      <div class="col-md-4 col-sm-4 col-xs-6">
+          <div class="footer-widget">
+            <h3>Stay in touch</h3>
+            <div class="footer-widget-content">
+              <a href="mailto:sales@example.com" class="contact-link">sales@example.com</a>
+              <a href="mailto:support@example.com" class="contact-link red"> support@example.com </a>
+              <a href="tel:0121234" class="contact-link">(123) 456-789</a>
+              <div class="footer-social">
+                <ul class="social">
+                  <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-
-
   </div>
+
 </div>
 
-<footer class="footer" style="margin-top: 15px;">
-  <div class="container">
-    <p class="text-muted">&copy; 2019 Captain's Shop BD.</p>
-    <p class="text-muted">&copy; 2019 Captain's Shop BD.</p>
-  </div>
-</footer>
-
-
+<div class="container footer-text">
+    <p class="text-muted"  style="float: right;">Designed & Developed by &copy; <a target="_blank" href="http://ahmmedabir.me">Ahmmed Abir</a></p>
+  <p class="text-muted">&copy; 2019 Captain's Shop BD.</p>
+</div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>

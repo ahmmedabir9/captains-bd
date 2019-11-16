@@ -6,8 +6,8 @@ var fs = require('fs-extra');
 //Product Models
 var Product = require('../models/product');
 
-//Category Models
-var Category = require('../models/category');
+//Order Models
+var Order = require('../models/order');
 
 
 //Add Product to Cart
@@ -61,6 +61,7 @@ router.get('/add/:product', function (req, res) {
 
 router.get('/checkout', function (req, res) {
 
+    var shipping_cost = 100;
     if (req.session.cart && req.session.cart.length == 0) {
         delete req.session.cart;
         res.redirect('/cart/checkout');
@@ -69,12 +70,14 @@ router.get('/checkout', function (req, res) {
     else {
         res.render('checkout', {
             title: 'Checkout',
+            shipping_cost: shipping_cost,
             cart: req.session.cart
         });
     }
 
 
 });
+
 
 //Get Update Product
 
@@ -127,6 +130,78 @@ router.get('/clear', function (req, res) {
     req.flash('success', 'Cart Cleared!');
     res.redirect('/cart/checkout');
 
+});
+
+
+
+
+// Post Checkout Page
+
+router.post('/checkout', function (req, res) {
+
+    req.checkBody('name', 'Title must Have a value.').notEmpty();
+    req.checkBody('address', 'Description must Have a value.').notEmpty();
+    req.checkBody('mobile', 'Description must Have a value.').notEmpty();
+
+    var customer_name = req.body.name;
+    var email = req.body.email;
+    var mobile = req.body.mobile;
+    var cart = req.session.cart;
+    var address = req.body.address;
+    var amount = req.body.amount;
+    var district = req.body.district;
+    var shipping_cost = 100;
+    var payment_method = req.body.payment_method;
+    var note = req.body.note;
+    var status = 0;
+
+    console.log(amount);
+    
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+        res.render('/cart/checkout', {
+            errors: errors,
+            name: customer_name,
+            email: email,
+            cart: cart,
+            mobile: mobile,
+            address: address,
+            amount: amount,
+            district: district,
+            payment_method: payment_method,
+            shipping_cost: shipping_cost,
+            note: note,
+        });
+    }
+    else {
+
+        var amount2 = parseFloat(amount).toFixed(2);
+
+        var order = new Order({
+            customer_name: customer_name,
+            email: email,
+            mobile: mobile,
+            address: address,
+            amount: amount2,
+            district: district,
+            shipping_cost: shipping_cost,
+            payment_method: payment_method,
+            note: note,
+            cart: cart,
+            status: 0
+        });
+
+        order.save(function (err) {
+            if (err) return console.log(err);
+
+
+            req.flash('success', 'Order Placed!');
+            res.redirect('/cart/checkout');
+
+        });
+    }
 });
 
 

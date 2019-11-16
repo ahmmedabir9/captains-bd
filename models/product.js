@@ -24,6 +24,9 @@ var ProductSchema = mongoose.Schema({
     },
     image: {
         type: String,
+    },
+    featured: {
+        type: Number
     }
 })
 

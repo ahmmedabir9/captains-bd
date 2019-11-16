@@ -3,20 +3,13 @@
 <!-- Carousel
     ================================================== -->
 <div id="myCarousel" class="carousel slide c-slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
+
   <div class="carousel-inner" role="listbox">
     <div class="item active ">
       <img class="first-slide head-cover" src="/images/cover-1.jpg" alt="First slide">
       <div class="container">
         <div class="carousel-caption">
           <h1>Example headline.</h1>
-          <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon
-            buttons on the left and right might not load/display properly due to web browser security rules.</p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
         </div>
       </div>
@@ -26,8 +19,6 @@
       <div class="container">
         <div class="carousel-caption">
           <h1>Another example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
         </div>
       </div>
@@ -37,8 +28,6 @@
       <div class="container">
         <div class="carousel-caption">
           <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
         </div>
       </div>
@@ -55,113 +44,35 @@
 </div><!-- /.carousel -->
 
 
-
-
-
 <div class="container">
   <div class="section-header">
-    <h1>New Arrival!</h1>
+    <h1>Featured Products!</h1>
   </div>
-
   <div class="row">
-
-    <div class="col-sm-6 col-md-3">
+    <% products.forEach(function(p) { %>
+    <div class="col-xs-6 col-md-2 col-sm-4 p-card">
       <div class="thumbnail thumb-text">
         <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
+          <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
+            <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
+          </a>
         </div>
         <div class="caption">
-            <h3>Title Big Test Element</h3>
+          <h3><b><%= p.title %></b></h3>
         </div>
-        
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
+        <h4><b>Price:</b> <%= p.price %><b>৳</b></h4>
+        <a href="/products/<%= p.category %>/<%= p.slug %>" class="btn btn-info" role="button">View Details</a>
       </div>
     </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail thumb-text">
-        <div class="inner">
-          <img class="card-img-top" src="/images/pro-1.jpg" alt="...">
-        </div>
-        <h3>Title</h3>
-        <h4>Price</h4>
-        <a href="#" class="btn btn-info" role="button">View Details</a>
-      </div>
-    </div>
-
-
-
-
+    <% }); %>
   </div>
 </div>
 
+<div class="hero">
+  <div class="hero-text">
+    <h1>Your Cart is Empty!</h1>
+  </div>
+</div>
 
 
 <% include _layouts/footer %>

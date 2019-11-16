@@ -27,6 +27,10 @@ ul.gallery li {
   list-style: none;
 }
 
+table.alignmiddle td {
+  vertical-align: middle !important;
+}
+
 body {
     padding-top: 56px;
   }

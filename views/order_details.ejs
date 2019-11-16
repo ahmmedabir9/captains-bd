@@ -1,0 +1,121 @@
+<% include _layouts/header %>
+
+
+
+
+<div class="container c-slide">
+
+  <ol class="breadcrumb" style="margin: 15px;">
+    <li><a href="/">Home</a></li>
+    <li><a href="/products">Order Details</a></li>
+  </ol>
+
+
+
+
+  <div class="container row">
+    <form action="/orders">
+      <div class="input-group">
+
+        <input type="text" name="id" class="form-control" placeholder="Insert Our order ID">
+        <span class="input-group-btn">
+          <input type="submit" value="Search" class="btn btn-success">
+        </span>
+      </div>
+
+    </form>
+  </div>
+
+  <% if (typeof order != "undefined") { %>
+
+    <div class="container row">
+  
+      <div class="col-xs-12 col-md-9">
+  
+  
+  
+        <div class="col-xs-12 col-md-7">
+          
+          <table class="table alignmiddle">
+          <tr>
+            <th>Images</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Total</th>
+          </tr>
+          <% var total = 0; %>
+
+          <% cart.forEach(function(product) { %>
+          <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+          <% total += +sub %>
+          <tr>
+            <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td><%= product.qty %></td>
+            <td>
+              <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
+              <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=add">+</a>
+
+              <a class="btn btn-xs btn-danger" href="/cart/update/<%= product.title %>?action=clear">Clear</a>
+            </td>
+            <td><%= sub %></td>
+          </tr>
+
+          <% }); %>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %></td>
+
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Shipping Cost: </b><%= parseFloat(shipping_cost).toFixed(2) %></td>
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+            </td>
+            <td colspan="6" align="right"><b>Discount: </b>0</td>
+          </tr>
+          <tr>
+            <td colspan="3" align="">
+              <a href="/cart/clear" class="btn btn-danger btn-sm clearcart">Clear Cart</a>
+            </td>
+            <td colspan="6" align="right"><b>Subtotal: </b><%= parseFloat(total+shipping_cost).toFixed(2) %></td>
+
+
+
+
+
+        </table>
+  
+        </div>
+  
+        <div class="col-xs-12 col-md-5">
+          <h3 class="page-header product-header"><%= order.id %></h3>
+          <p><%= order.amount %></p>
+          <p><%= order.customer_name %></p>
+          
+          <p><select name="category" class="form-control">
+              <% order.cart.forEach(function(c) { %>
+              <option value="<%= cat.slug %>"><%= c.title %></option>
+              <% }); %></p>
+          <p>
+        </div>
+      </div>
+    </div>
+  <% }%>
+
+
+
+
+</div>
+
+
+
+
+<% include _layouts/footer %>

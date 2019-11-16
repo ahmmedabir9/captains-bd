@@ -1,0 +1,101 @@
+<%- include('../_layouts/adminheader') %>
+
+
+<h1 class="page-header">Order Details <a href="/admin/orders" class="btn btn-sm btn-info">Back to all Orders</a>
+</h1>
+
+<br><br>
+
+<div class="col-md-6">
+  <p>Order ID: <%= id %></p>
+  <p>Name: <%= name %></p>
+  <p>Address: <%= address %></p>
+  <p>District: <%= district %></p>
+  <p>Mobile: <%= mobile %></p>
+  <p>Email Address: <%= email %></p>
+  <p>Amount: <%= amount %></p>
+  <p>Shipping Cost: <%= shipping_cost %></p>
+  <p>Delevery Note: <%= note %></p>
+  <p>Status: <%= status %></p>
+
+
+  <form method="post" action="/admin/orders/order-details/<%= id %>" enctype="multipart/form-data">
+
+
+  </form>
+
+</div>
+<div class="col-md-6">
+
+  <table class="table alignmiddle">
+    <tr>
+      <th>Images</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+    <% var total = 0; %>
+
+    <% cart.forEach(function(product) { %>
+    <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+    <% total += +sub %>
+    <tr>
+      <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
+      <td><%= product.title %></td>
+      <td><%= product.price %></td>
+      <td><%= product.qty %></td>
+      
+      <td><%= sub %></td>
+    </tr>
+
+    <% }); %>
+   
+  </table>
+
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/basic.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/dropzone.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/dropzone.js"></script>
+
+
+
+<script>
+
+  //Preview Image
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#img").change(function () {
+    readURL(this);
+  });
+
+
+  //DropZone
+  Dropzone.options.dropzoneForm = {
+    acceptedFiles: "image/*",
+    init: function () {
+      this.on("queuecomplete", function (file) {
+        setTimeout(function () {
+          location.reload()
+        }, 1000);
+
+      });
+    }
+  }
+
+
+
+</script>
+
+
+<%- include('../_layouts/adminfooter') %>

@@ -1,0 +1,42 @@
+<%- include('../_layouts/adminheader') %>
+
+<h1 class="page-header">Orders</h1>
+<br><br>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+
+        <thead>
+            <tr class="home">
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Bill</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(function(orders) { %>
+            <tr>
+                <td><%= orders._id %></td>
+                <td><%= orders.customer_name %></td>
+                <td><%= parseFloat(orders.amount + orders.shipping_cost).toFixed(2) %></td>
+                <td>
+                    <%  if (orders.status == "0") { %>
+                    On Hold
+                    <% } else { %>
+                    Confirmed
+                    <% } %>
+                </td>
+                <td><a class="btn btn-xs btn-primary" href="/admin/orders/order-details/<%= orders._id %>">View</a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+
+    </table>
+</div>
+
+
+
+<%- include('../_layouts/adminfooter') %>

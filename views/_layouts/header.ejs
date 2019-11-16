@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Captains</title>
+  <title><%= title %></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
@@ -33,11 +33,26 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/admin">Admin</a></li>
           <li><a href="/products">Products</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="/user/login">Login</a></li>
+          <li><a href="/orders">Orders</a></li>
+
+
+          <% if (user) { %>
+          <li><a href="/users/logout">Hi, <%= user.username %> (Logout)</a></li>
+
+
+          <% } else{ %>
+
+          <li><a href="/users/login">Login</a></li>
           <li><a href="/users/register">Register</a></li>
+          <% } %>
+
+          <% if (user && user.admin==1) { %>
+  
+            <li><a href="/admin">Admin Area</a></li>
+  
+            <% } %>
+
           <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> (
               <% if (typeof cart != "undefined") { %>
               <%= cart.length %>
@@ -53,7 +68,7 @@
 
   <!-- <div class="container"> -->
 
-  <div style="float:right; margin-top: 60px; margin-left: 20px; position: absolute; ">
+  <div style="margin-top: 60px;">
     <%- messages('messages', locals) %>
     <% if (errors) {%>
     <% errors.forEach(function(error) { %>
