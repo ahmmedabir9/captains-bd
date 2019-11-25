@@ -43,109 +43,89 @@
           </tr>
 
           <% }); %>
-          <tr>
-            <td colspan="3" align="">
-            </td>
-            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %></td>
 
-          </tr>
-          <tr>
-            <td colspan="3" align="">
-            </td>
-            <td colspan="6" align="right"><b>Shipping Cost: </b><%= parseFloat(shipping_cost).toFixed(2) %></td>
-          </tr>
-          <tr>
-            <td colspan="3" align="">
-            </td>
-            <td colspan="6" align="right"><b>Discount: </b>0</td>
-          </tr>
           <tr>
             <td colspan="3" align="">
               <a href="/cart/clear" class="btn btn-danger btn-sm clearcart">Clear Cart</a>
             </td>
-            <td colspan="6" align="right"><b>Subtotal: </b><%= parseFloat(total+shipping_cost).toFixed(2) %></td>
+            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %> + Shipping</td>
 
         </table>
 
+      </div>
 
-        <form action="" method="post">
-          <div class="input-group">
 
-            <input type="text" class="form-control" placeholder="Insert Your Coupon">
-            <span class="input-group-btn">
-              <button class="btn btn-success" type="button">Apply Coupon</button>
-            </span>
-          </div>
-
-        </form>
 
     </div>
+    <div class="col-md-6 order-md-1">
+      <h4 class="page-header">Billing Details</h4>
+      <form method="post" action="/cart/checkout" enctype="multipart/form-data">
 
 
-
-  </div>
-  <div class="col-md-6 order-md-1">
-    <h4 class="page-header">Billing Details</h4>
-    <form method="post" action="/cart/checkout" enctype="multipart/form-data">
-
-
-      <div class="form-group">
-        <label for="">Name</label>
-        <input type="text" class="form-control" name="name" placeholder="Name" <% if (user) { %> value=<%= user.name %>
-          <% } %> required>
-      </div>
-
-
-      <div class="form-group">
-        <label for="">Email Address</label>
-        <input type="text" class="form-control" name="email" placeholder="Email Address" <% if (user) { %>
-          value=<%= user.email %> <% } %> required>
-      </div>
-
-      <div class="form-group">
-        <label for="">Mobile Number</label>
-        <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="">District</label>
-        <select class="" name="district" required>
-          <option value="dhaka">Dhaka</option>
-          <option value="other">Others</option>
-        </select>
-      </div>
-
-
-      <div class="form-group">
-        <label for="">Shipping Address</label>
-        <textarea name="address" class="form-control" rows="5" placeholder="Shipping Address"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="">Payment Method</label>
-        <div class="custom-control custom-radio">
-          <input id="onDelivery" name="payment_method" value="onDelivery" type="radio" class="custom-control-input"
-            required checked>
-          <label class="custom-control-label" for="debit">Cash on Delivery</label>
+        <div class="form-group">
+          <label for="">Name</label>
+          <input type="text" class="form-control" name="name" placeholder="Name" <% if (user) { %>
+            value=<%= user.name %> <% } %> required>
         </div>
-        <div class="custom-control custom-radio">
-          <input id="bkash" name="payment_method" value="bkash" type="radio" class="custom-control-input" required>
-          <label class="custom-control-label" for=>Bkash</label>
+
+
+        <div class="form-group">
+          <label for="">Email Address</label>
+          <input type="text" class="form-control" name="email" placeholder="Email Address" <% if (user) { %>
+            value=<%= user.email %> <% } %> required>
         </div>
-      </div>
 
-      <hr>
+        <div class="form-group">
+          <label for="">Mobile Number</label>
+          <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" <% if (user) { %>
+            value=<%= user.mobile %> <% } %> required>
+        </div>
 
-      <div class="form-group">
-        <label for="">Delivery Note</label>
-        <textarea name="note" class="form-control" rows="10" placeholder="Delivery Note"></textarea>
-      </div>
+        <div class="form-group">
+          <label for="">District</label>
+          <select class="" name="district" required>
+            <option value="dhaka">Dhaka</option>
+            <option value="other">Others</option>
+          </select>
+        </div>
 
-      <input type="hidden" name="amount" value="<%= total %>">
-      <button class="btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
-    </form>
+
+        <div class="form-group">
+          <label for="">Shipping Address</label>
+          <textarea name="address" class="form-control" rows="5"
+            placeholder="Shipping Address"><% if (user) { %><%= user.address %> <% } %></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="">Payment Method</label>
+          <div class="custom-control custom-radio">
+            <input id="onDelivery" name="payment_method" value="onDelivery" type="radio" class="custom-control-input"
+              required checked>
+            <label class="custom-control-label" for="debit">Cash on Delivery</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="bkash" name="payment_method" value="bkash" type="radio" class="custom-control-input" required>
+            <label class="custom-control-label" for=>Bkash</label>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+          <label for="">Delivery Note</label>
+          <textarea name="note" class="form-control" rows="10" placeholder="Delivery Note"></textarea>
+        </div>
+
+        <input type="hidden" name="amount" value="<%= total %>">
+        <% if (user) { %>
+        <input type="hidden" name="user" value="<%= user.username %>">
+        <% } %>
+
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
+      </form>
+    </div>
   </div>
-</div>
 </div>
 
 <% } else { %>

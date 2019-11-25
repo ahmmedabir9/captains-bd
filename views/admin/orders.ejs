@@ -23,9 +23,13 @@
                 <td><%= parseFloat(orders.amount + orders.shipping_cost).toFixed(2) %></td>
                 <td>
                     <%  if (orders.status == "0") { %>
-                    On Hold
-                    <% } else { %>
-                    Confirmed
+                    <span class="label label-warning">On Hold</span>
+                    <% } else if(orders.status == "1") { %>
+                    <span class="label label-danger">Cancelled</span>
+                    <% } else if(orders.status == "2") { %>
+                    <span class="label label-info">Confirmed</span>
+                    <% } else if(orders.status == "3") { %>
+                    <span class="label label-success">Completed</span>
                     <% } %>
                 </td>
                 <td><a class="btn btn-xs btn-primary" href="/admin/orders/order-details/<%= orders._id %>">View</a>

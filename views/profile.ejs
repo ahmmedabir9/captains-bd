@@ -1,0 +1,118 @@
+<% include _layouts/header %>
+
+
+
+
+<div class="container c-slide">
+
+    <ol class="breadcrumb" style="margin: 15px;">
+        <li><a href="/">Home</a></li>
+        <li class="active"><%= user.username %></li>
+    </ol>
+    <div class="container row">
+
+
+
+        <div class="col-xs-12 col-md-6 user-det">
+
+            <img class="user-image" src="/images/user.png" alt="aaa">
+            <h1><%= user.name %><% if(user.admin == 1) { %>
+                <span class="label label-warning">Admin</span>
+                <% } %>
+            </h1>
+            <h3><b>Username: </b><%= user.username %></h3>
+            <h3><b>Email: </b><%= user.email %></h3>
+            <h3><b>Mobile: </b><%= user.mobile %></h3>
+            <h3><b>Address: </b><%= user.address %></h3>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+
+
+            <h2>Edit Profile</h2>
+            <br>
+            <form method="post" action="/users/profile/<%= user.id %>" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" value="<%= user.name %>" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" name="email" value="<%= user.email %>" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Mobile</label>
+                    <input type="text" class="form-control" name="mobile" value="<%= user.mobile %>"
+                        placeholder="Mobile">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <textarea name="address" class="form-control" cols="30" rows="10"
+                        placeholder="Address"><%= user.address %></textarea>
+                </div>
+
+
+
+                <button class="btn btn-default">Submit</button>
+
+            </form>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+<div class="container">
+    <br><br>
+    <h2>My Orders</h2>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped">
+
+            <thead>
+                <tr class="home">
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Bill</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(function(orders) { %>
+                <tr>
+                    <td><%= orders._id %></td>
+                    <td><%= orders.customer_name %></td>
+                    <td><%= parseFloat(orders.amount + orders.shipping_cost).toFixed(2) %></td>
+                    <td>
+                        <%  if (orders.status == "0") { %>
+                        On Hold
+                        <% } else { %>
+                        Confirmed
+                        <% } %>
+                    </td>
+                    <td><a class="btn btn-xs btn-primary" href="/admin/orders/order-details/<%= orders._id %>">View</a>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+
+<% include _layouts/footer %>

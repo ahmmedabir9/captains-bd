@@ -1,0 +1,43 @@
+<%- include('../_layouts/adminheader') %>
+
+<h1 class="page-header">Edit User Info <a href="/admin/users" class="btn btn-sm btn-info">Back to all Users</a>
+</h1>
+
+<br><br>
+
+<h1><%= user.name %><% if(user.admin == 1) { %>
+    <span class="label label-warning">Admin</span>
+    <% } %>
+</h1>
+<h5><b>Username: </b><%= user.username %></h5>
+<h5><b>Email: </b><%= user.email %></h5>
+<h5><b>Mobile: </b><%= user.mobile %></h5>
+<h5><b>Address: </b><%= user.address %></h5>
+
+
+<form method="post" action="/admin/users/edit-user/<%= user._id %>">
+
+    <div class="form-group">
+        <label for="">User Type</label>
+        <select name="admin" class="form-control">
+            <option value="0" <% if (user.admin == 0) { %> selected="selected" <% } %>>
+                Customer
+            </option>
+            <option value="1" <% if (user.admin == 1) { %> selected="selected" <% } %>>
+                Admin
+            </option>
+        </select>
+    </div>
+
+    <button class="btn btn-default">Submit</button>
+
+</form>
+
+
+
+</div>
+
+
+
+
+<%- include('../_layouts/adminfooter') %>

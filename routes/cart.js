@@ -15,6 +15,10 @@ var Order = require('../models/order');
 router.get('/add/:product', function (req, res) {
 
     var slug = req.params.product;
+    var size = req.body.size;
+
+    console.log(slug);
+    
 
     Product.findOne({ slug: slug }, function (err, p) {
         if (err) console.log(err);
@@ -25,6 +29,7 @@ router.get('/add/:product', function (req, res) {
                 title: slug,
                 qty: 1,
                 price: parseFloat(p.price).toFixed(2),
+                size: size,
                 image: '/productImages/' + p._id + '/' + p.image
             });
         }
@@ -33,7 +38,7 @@ router.get('/add/:product', function (req, res) {
             var newItem = true;
 
             for (var i = 0; i < cart.length; i++) {
-                if (cart[i].title == slug) {
+                if (cart[i].title == slug && cart[i].size == size) {
                     cart[i].qty++;
                     newItem = false;
                     break;
@@ -44,6 +49,7 @@ router.get('/add/:product', function (req, res) {
                 cart.push({
                     title: slug,
                     qty: 1,
+                    size: size,
                     price: parseFloat(p.price).toFixed(2),
                     image: '/productImages/' + p._id + '/' + p.image
                 });
@@ -71,7 +77,8 @@ router.get('/checkout', function (req, res) {
         res.render('checkout', {
             title: 'Checkout',
             shipping_cost: shipping_cost,
-            cart: req.session.cart
+            cart: req.session.cart,
+            user: res.locals.user
         });
     }
 
@@ -150,13 +157,18 @@ router.post('/checkout', function (req, res) {
     var address = req.body.address;
     var amount = req.body.amount;
     var district = req.body.district;
-    var shipping_cost = 100;
+    var shipping_cost;
     var payment_method = req.body.payment_method;
     var note = req.body.note;
-    var status = 0;
+    var user = null;
+    if (req.body.user) user = req.body.user;
+
+    if(district=="dhaka")   shipping_cost=50;
+    else    shipping_cost=100;
+
 
     console.log(amount);
-    
+
 
     var errors = req.validationErrors();
 
@@ -190,6 +202,7 @@ router.post('/checkout', function (req, res) {
             payment_method: payment_method,
             note: note,
             cart: cart,
+            user: user,
             status: 0
         });
 

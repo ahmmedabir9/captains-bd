@@ -19,7 +19,7 @@ router.get('/', isAdmin, function (req, res) {
         res.render('admin/categories', {
             categories: categories
         });
-    });
+    }).sort( { _id: -1 } );
 });
 
 

@@ -27,6 +27,9 @@ var ProductSchema = mongoose.Schema({
     },
     featured: {
         type: Number
+    },
+    size: {
+        type: Array
     }
 })
 

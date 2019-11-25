@@ -19,6 +19,18 @@ ul.gallery {
   padding: 0;
 }
 
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 40%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: super;
+  border-radius: .50em;
+}
 
 
 ul.gallery li {
@@ -83,11 +95,12 @@ body {
       background-size: cover;
       padding: 0;
       border-radius: 5px;
+      box-shadow: none;
     }
 
     .nav-sidebar {
-      display: inline-block;
-      padding: 25px;
+      display: block;
+      padding: 15px;
     } 
 
     .mobile-disable {

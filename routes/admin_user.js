@@ -1,22 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../config/auth');
+var isAdmin = auth.isAdmin;
 
-// Get Page index
+
+//User Models
+var User = require('../models/user');
+
+
+//Order Models
+var Order = require('../models/order');
+
+
+
+// Get User index
 
 router.get('/', function (req, res) {
-    Page.find({}).sort({sorting: 1}).exec(function (err, pages) {
-        res.render('admin/pages', {
-            pages: pages
+
+    User.find(function (err, users) {
+        res.render('admin/users', {
+            users: users
         });
-    }); 
+    }).sort({ _id: -1 });
 });
 
-
-
-
-//Page Models
-
-var Page = require('../models/page');
 
 
 
@@ -126,22 +133,22 @@ router.post('/reorder-pages', function (req, res) {
 
 
 
-// Get Edit Page
+// Get Edit User
 
 
 
-router.get('/edit-page/:id', function (req, res) {
+router.get('/edit-user/:id', function (req, res) {
 
-    Page.findById(req.params.id, function (err, page) {
+    User.findById(req.params.id, function (err, user) {
         if (err) return console.log(err);
 
-        res.render('admin/edit_page', {
-            title: page.title,
-            slug: page.slug,
-            content: page.content,
-            id: page._id
+        res.render('admin/edit_user', {
+            title: user.name,
+            user: user
         });
     });
+
+
 
 
 
@@ -149,19 +156,14 @@ router.get('/edit-page/:id', function (req, res) {
 
 
 
-// Post Edit Page
+// Post Edit User
 
 
 
-router.post('/edit-page/:id', function (req, res) {
+router.post('/edit-user/:id', function (req, res) {
 
-    req.checkBody('title', 'Title must Have a value.').notEmpty();
-    req.checkBody('content', 'Content must Have a value.').notEmpty();
 
-    var title = req.body.title;
-    var slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
-    if (slug == "") slug = title.replace(/\s+/g, '-').toLowerCase();
-    var content = req.body.content;
+    var admin = req.body.admin;
     var id = req.params.id;
 
     var errors = req.validationErrors();
@@ -169,52 +171,31 @@ router.post('/edit-page/:id', function (req, res) {
     if (errors) {
         console.log('errors');
 
-        res.render('admin/edit_page', {
+        res.render('admin/edit_user', {
             errors: errors,
-            title: title,
-            slug: slug,
-            content: content,
-            id: id
+            title: user.name,
+            user: user
         });
     }
     else {
-        Page.findOne({ slug: slug, _id: { '$ne': id } }, function (err, page) {
-            if (page) {
-                req.flash('danger', 'Page slug exists, choise another');
-                res.render('admin/edit_page', {
-                    title: title,
-                    slug: slug,
-                    content: content,
-                    id: id
-                });
-            }
-            else {
+        User.findById(id, function (err, user) {
+            if (err) return console.log(err);
 
-                Page.findById(id, function (err, page) {
-                    if (err) return console.log(err);
+            user.admin = admin;
 
-                    page.title = title;
-                    page.slug = slug;
-                    page.content = content;
+            user.save(function (err) {
+                if (err) return console.log(err);
 
-                    page.save(function (err) {
-                        if (err) return console.log(err);
-
-                        req.flash('success', 'Page Edited Successfully!');
-                        res.redirect('/admin/pages/edit-page/' + id);
-
-                    });
-                });
-
-
-
-            }
+                req.flash('success', 'User Status Updated Successfully!');
+                res.redirect('/admin/users/edit-user/' + id);
+            });
         });
+
+
+
     }
-
-
-
 });
+
 
 
 // Get Delete index

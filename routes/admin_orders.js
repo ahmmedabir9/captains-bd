@@ -27,7 +27,7 @@ router.get('/', isAdmin, function (req, res) {
         res.render('admin/orders', {
             orders: orders,
         });
-    });
+    }).sort( { _id: -1 } );
 });
 
 
@@ -46,132 +46,76 @@ router.get('/order-details/:id', isAdmin, function (req, res) {
     if (req.session.errors) errors = req.session.errors;
     req.session.errors = null;
 
-        Order.findById(req.params.id, function (err, o) {
-            if (err) {
-                console.log(err);
-                res.redirect('/admin/orders');
+    Order.findById(req.params.id, function (err, o) {
+        if (err) {
+            console.log(err);
+            res.redirect('/admin/orders');
 
-            }
-            else {
+        }
+        else {
 
-                res.render('admin/order_details', {
-                    
-                    errors: errors,
-                    name: o.customer_name,
-                    amount: o.amount,
-                    shipping_cost: o.shipping_cost,
-                    cart: o.cart,
-                    status: o.status,
-                    email: o.email,
-                    mobile: o.mobile,
-                    payment_method: o.payment_method,
-                    address: o.address,
-                    district: o.district,
-                    note: o.note,                    
-                    id: o._id
-                });
-            }
-        });
+            res.render('admin/order_details', {
 
+                errors: errors,
+                name: o.customer_name,
+                amount: o.amount,
+                shipping_cost: o.shipping_cost,
+                cart: o.cart,
+                status: o.status,
+                email: o.email,
+                mobile: o.mobile,
+                payment_method: o.payment_method,
+                address: o.address,
+                district: o.district,
+                note: o.note,
+                username: o.user,
+                id: o._id
+            });
+        }
     });
 
+});
 
 
 
 
-// Post Edit Product
+
+// Post Order Details
 
 
 
-router.post('/edit-product/:id', function (req, res) {
+router.post('/order-details/:id', function (req, res) {
 
-    var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
-
-    req.checkBody('title', 'Title must Have a value.').notEmpty();
-    req.checkBody('desc', 'Description must Have a value.').notEmpty();
-    req.checkBody('price', 'Price is not Valid.').isDecimal();
-    req.checkBody('image', 'You must upload an image file.').isImage(imageFile);
-
-    var title = req.body.title;
-    var slug = title.replace(/\s+/g, '-').toLowerCase();
-    var desc = req.body.desc;
-    var price = req.body.price;
-    var category = req.body.category;
-    var pimage = req.body.pimage;
+    var status = req.body.status;
     var id = req.params.id;
-    var featured = req.body.featured;
+
 
     var errors = req.validationErrors();
 
-
     if (errors) {
         req.session.errors = errors;
-        res.redirect('/admin/products/edit-product/' + id);
+        res.redirect('/admin/orders/order-details/' + id);
     }
 
     else {
-        Product.findOne({ slug: slug, _id: { '$ne': id } }, function (err, p) {
-            if (err) {
-                console.log(err);
 
-            }
-
-            if (p) {
-                req.flash('danger', 'Product Title Exists, Choose Another');
-                res.redirect('/admin/products/edit-product/' + id);
-            }
-
-            else {
-                Product.findById(id, function (err, p) {
-                    if (err) console.log(err);
+        Order.findById(id, function (err, o) {
+            if (err) console.log(err);
 
 
-                    p.title = title;
-                    p.slug = slug;
-                    p.desc = desc;
-                    p.price = parseFloat(price).toFixed(2);
-                    p.category = category;
-                    p.featured = featured;
+            o.status = status;
 
-                    if (imageFile != "") {
-                        p.image = imageFile;
-                    }
+            o.save(function (err) {
+                if (err) console.log(err);
+
+                req.flash('success', 'Order Status Updated!');
+                res.redirect('/admin/orders/order-details/' + id);
 
 
-                    p.save(function (err) {
-                        if (err) console.log(err);
+            })
 
-                        if (imageFile != "") {
-                            if (pimage != "") {
-                                fs.remove('public/productImages/' + id + '/' + pimage, function (err) {
-                                    console.log(err);
-
-
-                                })
-                            }
-
-                            var productImage = req.files.image;
-                            var path = 'public/productImages/' + id + '/' + imageFile;
-
-                            productImage.mv(path, function (err) {
-                                return console.log(err);
-                            });
-
-                        }
-
-
-                        req.flash('success', 'Product Edited!');
-                        res.redirect('/admin/products/edit-product/' + id);
-
-
-                    })
-
-                })
-            }
-
-        });
+        })
     }
-
 
 });
 

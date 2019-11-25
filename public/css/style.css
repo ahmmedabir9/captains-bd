@@ -112,7 +112,7 @@ table.alignmiddle td {
   }
 
   .hero {
-    background-image: url("/images/cover-1.jpg");
+    background-image: url("/images/cover-1.png");
     background-position: center;
     overflow: hidden;
     background-repeat: no-repeat;
@@ -212,7 +212,7 @@ ul.gallery li {
 
 li{
     list-style: none;
-    float: left;
+    
     padding: 0 10px;
 }
     .footer-social ul li:first-child{
@@ -229,6 +229,20 @@ li{
 .footer-widget .red{
     color: red !important;
   }
+
+
+  .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 40%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: super;
+    border-radius: .50em;
+}
 
 .navbar {
     border-radius: 0px !important;
@@ -250,6 +264,10 @@ li{
     padding: 20px 0;
 }
 
+.head-cover {
+    width: 100%;
+    height: 100vh;
+}
 .navbar-toggle {
     margin-top: 12px !important;
 }
@@ -258,6 +276,17 @@ li{
 .p {
     border-left: 1px solid #eee;
     background-color: #fff;
+}
+
+.user-image {
+    width: 50%;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.user-det {
+    text-align: center;
+    border: 1px solid #eee;
 }
 
 .page-header {

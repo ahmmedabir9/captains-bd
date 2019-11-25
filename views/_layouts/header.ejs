@@ -38,8 +38,21 @@
 
 
           <% if (user) { %>
-          <li><a href="/users/logout">Hi, <%= user.username %> (Logout)</a></li>
 
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false"><%= user.username %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/users/profile/<%= user._id %>"><i class="fas fa-user"></i> My Profile</a></li>
+              <li><a href="/users/logout">Logout</a></li>
+
+              <% if (user && user.admin==1) { %>
+              <li role="separator" class="divider"></li>
+              <li><a href="/admin">Admin Area</a></li>
+              <% } %>
+            </ul>
+          </li>
 
           <% } else{ %>
 
@@ -47,13 +60,9 @@
           <li><a href="/users/register">Register</a></li>
           <% } %>
 
-          <% if (user && user.admin==1) { %>
-  
-            <li><a href="/admin">Admin Area</a></li>
-  
-            <% } %>
 
-          <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> (
+
+          <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i>Cart (
               <% if (typeof cart != "undefined") { %>
               <%= cart.length %>
               <% } else{ %>

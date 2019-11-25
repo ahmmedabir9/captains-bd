@@ -12,14 +12,14 @@ var Category = require('../models/category');
 
 
 router.get('/', function (req, res) {
-    Product.find({featured: 1 }, function (err, products) {
+    Product.find(function (err, products) {
         if (err) console.log(err);
 
         res.render('index', {
             title: "Captain\'s Shop BD | Home",
             products: products
         });
-    });
+    }).sort( { _id: -1 } );
 });
 
 

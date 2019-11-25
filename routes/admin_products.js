@@ -27,7 +27,7 @@ router.get('/', isAdmin, function (req, res) {
             products: products,
             count: count
         });
-    });
+    }).sort( { _id: -1 } );
 });
 
 
@@ -77,6 +77,12 @@ router.post('/add-product', function (req, res) {
     var desc = req.body.desc;
     var price = req.body.price;
     var category = req.body.category;
+    var s = req.body.s;
+    var m = req.body.m;
+    var l = req.body.l;
+    var xl = req.body.xl;
+    var xxl = req.body.xxl;
+    var size = [s, m, l, xl, xxl];
 
     var errors = req.validationErrors();
 
@@ -114,6 +120,7 @@ router.post('/add-product', function (req, res) {
                     price: price2,
                     category: category,
                     featured: 0,
+                    size: size,
                     image: imageFile
                 });
 
@@ -196,6 +203,7 @@ router.get('/edit-product/:id', isAdmin, function (req, res) {
                             image: p.image,
                             featured: p.featured,
                             galleryImages: galleryImages,
+                            size: p.size,
                             id: p._id
                         });
                     }
@@ -228,6 +236,14 @@ router.post('/edit-product/:id', function (req, res) {
     var pimage = req.body.pimage;
     var id = req.params.id;
     var featured = req.body.featured;
+    var s = req.body.s;
+    var m = req.body.m;
+    var l = req.body.l;
+    var xl = req.body.xl;
+    var xxl = req.body.xxl;
+    var size = [s, m, l, xl, xxl];
+
+    
 
     var errors = req.validationErrors();
 
@@ -260,6 +276,7 @@ router.post('/edit-product/:id', function (req, res) {
                     p.price = parseFloat(price).toFixed(2);
                     p.category = category;
                     p.featured = featured;
+                    p.size = size;
 
                     if (imageFile != "") {
                         p.image = imageFile;

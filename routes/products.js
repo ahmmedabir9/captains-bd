@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
             title: "Captain's Products",
             products: products
         });
-    });
+    }).sort( { _id: -1 } );
 });
 
 
@@ -41,7 +41,7 @@ router.get('/:category', function (req, res) {
                 title: c.title+"Captain's Products",
                 products: products
             });
-        });
+        }).sort( { _id: -1 } );
     });
 });
 

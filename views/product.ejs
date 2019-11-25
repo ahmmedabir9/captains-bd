@@ -40,12 +40,18 @@
         <p><%= p.category %></p>
         <p><%= p.desc %></p>
         <p><b>Price: </b><%= parseFloat(p.price).toFixed(2) %><b>৳</b></p>
-        <p><select name="category" class="form-control">
-            <% categories.forEach(function(cat) { %>
-            <option value="<%= cat.slug %>"><%= cat.title %></option>
-            <% }); %></p>
+        <% if(p.size[0]!=null || p.size[1]!=null || p.size[2]!=null || p.size[3]!=null || p.size[4]!=null) { %>
+        <p><b>Available Sizes: </b>
+          <% for(var i=0;i<5;i++) { %>
+          <% if(p.size[i]!=null) { %>
+          <%= p.size[i] %> |
+          <% } %>
+          <% } %><p class="text-muted">[Write the size on delivery note]</p></p>
+        <% } %>
         <p>
-          </select><input class="form-control qty-input" maxlength="4" size="4" type="text" name="qty" id="" placeholder="Quantity" value="1"> <a class="btn btn-sm btn-info btn-block" href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
+
+          <a class="btn btn-sm btn-info btn-block" href="/cart/add/<%= p.slug %>">Add to Cart</a>
+        </p>
       </div>
 
       <div class="col-xs-12 col-md-12">
@@ -67,7 +73,7 @@
     </div>
   </div>
 
-  
+
 
 
 </div>

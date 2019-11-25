@@ -1,0 +1,36 @@
+<%- include('../_layouts/adminheader') %>
+
+<h1 class="page-header">Users <a href="/admin/users/add-users" class="btn btn-sm btn-info">Add a new User</a>
+</h1>
+<br><br>
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr class="home">
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(function(user) { %>
+        <tr>
+            <td><%= user.name %><% if(user.admin == 1) { %>
+                <span class="label label-warning">Admin</span>
+                <% } %></td>
+            <td><a class="btn btn-xs btn-primary" href="/admin/users/edit-user/<%= user._id %>">Edit</a>
+            </td>
+            <td><a class="confirmDeletion btn btn-xs btn-danger"
+                    href="/admin/products/delete-product/<%= user._id %>">Delete</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+
+</table>
+
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+
+<%- include('../_layouts/adminfooter') %>

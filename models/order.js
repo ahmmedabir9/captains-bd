@@ -44,6 +44,9 @@ var OrderSchema = mongoose.Schema({
     status: {
         type: Number,
         required: true
+    },
+    user: {
+        type: Object
     }
 })
 

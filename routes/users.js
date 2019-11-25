@@ -2,9 +2,14 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var bcrypt = require('bcryptjs');
+var auth = require('../config/auth');
+var isUser = auth.isUser;
 
 // Get User Model
 var User = require('../models/user');
+
+//Order Models
+var Order = require('../models/order');
 
 
 //Get Register
@@ -22,6 +27,8 @@ router.post('/register', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
+    var address = "";
+    var mobile = "";
 
     req.checkBody('name', 'Name is Required!').notEmpty();
     req.checkBody('email', 'Please Enter a valid Email').isEmail();
@@ -42,7 +49,7 @@ router.post('/register', function (req, res) {
     }
 
     else {
-        User.findOne({username: username}, function (err, user) {
+        User.findOne({ username: username }, function (err, user) {
 
             if (err) console.log(err);
 
@@ -57,6 +64,8 @@ router.post('/register', function (req, res) {
                     email: email,
                     username: username,
                     password: password,
+                    address: address,
+                    mobile: mobile,
                     admin: 0
                 });
 
@@ -86,7 +95,7 @@ router.post('/register', function (req, res) {
 //Get Login
 router.get('/login', function (req, res) {
 
-    if(res.locals.user) res.redirect('/');
+    if (res.locals.user) res.redirect('/');
 
     res.render('login', {
         title: 'Log in'
@@ -111,6 +120,87 @@ router.get('/logout', function (req, res, next) {
     req.flash('success', 'You are logged out!');
     res.redirect('/users/login');
 });
+
+//Get User Profile
+router.get('/profile/:id', isUser, function (req, res) {
+
+    if (res.locals.user) {
+        Order.find({ user: res.locals.user.username }, function (err, orders) {
+            res.render('profile', {
+                title: 'Profile',
+                user: res.locals.user,
+                orders: orders
+            });
+        });
+    }
+});
+
+
+
+// Post User Profile
+
+
+
+router.post('/profile/:id', function (req, res) {
+
+    req.checkBody('name', 'Name must Have a value.').notEmpty();
+    req.checkBody('email', 'Email must Have a value.').notEmpty();
+
+    var name = req.body.name;
+    var email = req.body.email;
+    var mobile = req.body.mobile;
+    var address = req.body.address;
+    var id = req.params.id;
+
+    var errors = req.validationErrors();
+
+
+    if (errors) {
+        req.session.errors = errors;
+        res.redirect('/users/profile/' + id);
+    }
+
+    else {
+        User.findOne({ email: email, _id: { '$ne': id } }, function (err, u) {
+            if (err) {
+                console.log(err);
+
+            }
+
+            if (u) {
+                req.flash('danger', 'Email ID Exists, Choose Another');
+                res.redirect('/users/profile/' + id);
+            }
+
+            else {
+                User.findById(id, function (err, u) {
+                    if (err) console.log(err);
+
+
+                    u.name = name;
+                    u.email = email;
+                    u.mobile = mobile;
+                    u.address = address;
+
+
+                    u.save(function (err) {
+                        if (err) console.log(err);
+
+
+                        req.flash('success', 'Profile Updated!');
+                        res.redirect('/users/profile/' + id);
+
+                    })
+
+                })
+            }
+
+        });
+    }
+
+
+});
+
 
 //exports
 

@@ -16,10 +16,21 @@
   <p>Amount: <%= amount %></p>
   <p>Shipping Cost: <%= shipping_cost %></p>
   <p>Delevery Note: <%= note %></p>
-  <p>Status: <%= status %></p>
+  <p>User: <%= username %></p>
 
 
   <form method="post" action="/admin/orders/order-details/<%= id %>" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="">Order Status</label>
+      <select class="" name="status" required>
+        <option value="0" <% if (status == 0) { %> selected="selected" <% } %> >On Hold</option>
+        <option value="1" <% if (status == 1) { %> selected="selected" <% } %>>Cancelled</option>
+        <option value="2" <% if (status == 2) { %> selected="selected" <% } %> >Confirmed</option>
+        <option value="3" <% if (status == 3) { %> selected="selected" <% } %>>Completed</option>
+      </select>
+      <button class="btn btn-primary btn-xs" type="submit">Update</button>
+
+    </div>
 
 
   </form>
@@ -45,12 +56,12 @@
       <td><%= product.title %></td>
       <td><%= product.price %></td>
       <td><%= product.qty %></td>
-      
+
       <td><%= sub %></td>
     </tr>
 
     <% }); %>
-   
+
   </table>
 
 </div>

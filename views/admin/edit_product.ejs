@@ -34,12 +34,20 @@
   </div>
 
   <div class="form-group">
-    <input type="checkbox" name="featured" value="1" <% if (featured==1) { %> 
-      checked
-    <% } %>
-    >Feature Product
+    <label for="">Size</label> <br>
+    <input type="checkbox" name="s" value="S" <% if (size[0]=="S") { %> checked <% } %>> Small(S) <br>
+    <input type="checkbox" name="m" value="M" <% if (size[1]=="M") { %> checked <% } %>> Medium(M) <br>
+    <input type="checkbox" name="l" value="L" <% if (size[2]=="L") { %> checked <% } %>> Large(L) <br>
+    <input type="checkbox" name="xl" value="XL" <% if (size[3]=="XL") { %> checked <% } %>> Extra Large(XL) <br>
+    <input type="checkbox" name="xxl" value="XXL" <% if (size[4]=="XXL") { %> checked <% } %>> Extra Extra Large(XXL) <br>
+
   </div>
-  
+
+
+  <div class=" form-group">
+    <input type="checkbox" name="featured" value="1" <% if (featured==1) { %> checked <% } %>>Feature Product
+  </div>
+
 
   <div class="form-group">
     <label for="">Current Image</label>
