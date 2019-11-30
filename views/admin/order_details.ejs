@@ -22,7 +22,7 @@
   <form method="post" action="/admin/orders/order-details/<%= id %>" enctype="multipart/form-data">
     <div class="form-group">
       <label for="">Order Status</label>
-      <select class="" name="status" required>
+      <select class="form-control sel" name="status" required>
         <option value="0" <% if (status == 0) { %> selected="selected" <% } %> >On Hold</option>
         <option value="1" <% if (status == 1) { %> selected="selected" <% } %>>Cancelled</option>
         <option value="2" <% if (status == 2) { %> selected="selected" <% } %> >Confirmed</option>

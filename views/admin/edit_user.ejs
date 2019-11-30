@@ -5,10 +5,10 @@
 
 <br><br>
 
-<h1><%= user.name %><% if(user.admin == 1) { %>
+<h2><%= user.name %><% if(user.admin == 1) { %>
     <span class="label label-warning">Admin</span>
     <% } %>
-</h1>
+</h2>
 <h5><b>Username: </b><%= user.username %></h5>
 <h5><b>Email: </b><%= user.email %></h5>
 <h5><b>Mobile: </b><%= user.mobile %></h5>
@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="">User Type</label>
-        <select name="admin" class="form-control">
+        <select name="admin" class="form-control sel">
             <option value="0" <% if (user.admin == 0) { %> selected="selected" <% } %>>
                 Customer
             </option>
@@ -29,7 +29,10 @@
         </select>
     </div>
 
-    <button class="btn btn-default">Submit</button>
+    <button class="btn btn-default">Update</button>
+    <% if(user.admin != 1) { %>
+    <a class="confirmDeletion btn btn-danger" href="/admin/users/delete-user/<%= user._id %>">Delete</a>
+    <% } %>
 
 </form>
 

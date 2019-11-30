@@ -11,33 +11,29 @@ var Product = require('../models/product');
 var Category = require('../models/category');
 
 
+var latest;
+Product.find(function (err, n) {
+    if (err) console.log(err);
+
+    latest = n;
+
+
+}).sort({ _id: -1 }).limit(12);
+
 router.get('/', function (req, res) {
+
+
     Product.find(function (err, products) {
         if (err) console.log(err);
 
         res.render('index', {
             title: "Captain\'s Shop BD | Home",
-            products: products
+            products: products,
+            latest: latest
+
         });
-    }).sort( { _id: -1 } );
+    }).sort({ _id: -1 });
 });
-
-
-//Get Featured Products
-
-// router.get('/', function (req, res) {
-
-//     Product.find({featured: 1 }, function (err, products) {
-//         if (err) console.log(err);
-
-//         res.render('index', {
-//             title: "Captain\'s Shop BD | Home",
-//             products: products
-//         });
-//     });
-// });
-
-
 
 
 

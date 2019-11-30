@@ -30,6 +30,9 @@ var ProductSchema = mongoose.Schema({
     },
     size: {
         type: Array
+    },
+    discount_price: {
+        type: Number
     }
 })
 

@@ -18,17 +18,24 @@ router.get('/add/:product', function (req, res) {
     var size = req.body.size;
 
     console.log(slug);
-    
+
 
     Product.findOne({ slug: slug }, function (err, p) {
         if (err) console.log(err);
+
+        if (p.discount_price && p.discount_price != "0") {
+            var c_price = p.discount_price
+        }
+        else {
+            var c_price = p.price
+        }
 
         if (typeof req.session.cart == "undefined") {
             req.session.cart = [];
             req.session.cart.push({
                 title: slug,
                 qty: 1,
-                price: parseFloat(p.price).toFixed(2),
+                price: parseFloat(c_price).toFixed(2),
                 size: size,
                 image: '/productImages/' + p._id + '/' + p.image
             });
@@ -140,7 +147,12 @@ router.get('/clear', function (req, res) {
 });
 
 
-
+var c_name;
+var c_email;
+var c_mobile;
+var c_address;
+var c_amount;
+var c_shipping;
 
 // Post Checkout Page
 
@@ -163,9 +175,17 @@ router.post('/checkout', function (req, res) {
     var user = null;
     if (req.body.user) user = req.body.user;
 
-    if(district=="dhaka")   shipping_cost=50;
-    else    shipping_cost=100;
+    if (district == "dhaka") shipping_cost = 50;
+    else shipping_cost = 100;
 
+
+
+    c_name = customer_name;
+    c_email = email;
+    c_mobile = mobile;
+    c_address = address;
+    c_amount = amount;
+    c_shipping = shipping_cost;
 
     console.log(amount);
 
@@ -211,10 +231,52 @@ router.post('/checkout', function (req, res) {
 
 
             req.flash('success', 'Order Placed!');
-            res.redirect('/cart/checkout');
+            res.redirect('/cart/order-details');
 
         });
     }
+});
+
+
+
+
+//Get Order Confirmation Page
+
+
+router.get('/order-details', function (req, res) {
+
+
+
+    var item = req.session.cart;
+    var am = parseInt(c_amount);
+    var sh = parseInt(c_shipping);
+    var bill = parseFloat(am + sh).toFixed(2);
+
+
+    delete req.session.cart;
+
+
+    if (item) {
+        res.render('order_details', {
+
+            title: 'Order Confirmation',
+            cart: item,
+            name: c_name,
+            email: c_email,
+            mobile: c_mobile,
+            address: c_address,
+            amount: c_amount,
+            shipping_cost: c_shipping,
+            bill: bill
+        });
+    }
+
+    else {
+        res.redirect('/');
+    }
+
+
+
 });
 
 

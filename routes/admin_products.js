@@ -27,7 +27,7 @@ router.get('/', isAdmin, function (req, res) {
             products: products,
             count: count
         });
-    }).sort( { _id: -1 } );
+    }).sort({ _id: -1 });
 });
 
 
@@ -121,6 +121,7 @@ router.post('/add-product', function (req, res) {
                     category: category,
                     featured: 0,
                     size: size,
+                    discount_price: 0,
                     image: imageFile
                 });
 
@@ -169,7 +170,7 @@ router.post('/add-product', function (req, res) {
 
 
 
-router.get('/edit-product/:id', isAdmin, function (req, res) {
+router.get('/edit-product/:id', function (req, res) {
 
     var errors;
 
@@ -204,6 +205,7 @@ router.get('/edit-product/:id', isAdmin, function (req, res) {
                             featured: p.featured,
                             galleryImages: galleryImages,
                             size: p.size,
+                            discount_price: p.discount_price,
                             id: p._id
                         });
                     }
@@ -242,8 +244,9 @@ router.post('/edit-product/:id', function (req, res) {
     var xl = req.body.xl;
     var xxl = req.body.xxl;
     var size = [s, m, l, xl, xxl];
+    var discount_price = req.body.discount_price;
 
-    
+
 
     var errors = req.validationErrors();
 
@@ -277,6 +280,10 @@ router.post('/edit-product/:id', function (req, res) {
                     p.category = category;
                     p.featured = featured;
                     p.size = size;
+                    if (discount_price) {
+                        p.discount_price = parseFloat(discount_price).toFixed(2);
+                    }
+
 
                     if (imageFile != "") {
                         p.image = imageFile;
@@ -350,18 +357,18 @@ router.get('/delete-product/:id', isAdmin, function (req, res) {
     var path = 'public/productImages/' + id;
 
     fs.remove(path, function (err) {
-        if(err) console.log(err);
+        if (err) console.log(err);
 
         else {
             Product.findByIdAndRemove(id, function (err) {
                 console.log(err);
-                
+
             });
 
             req.flash('success', 'Product Deleted!');
             res.redirect('/admin/products');
         }
-        
+
     });
 });
 

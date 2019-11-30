@@ -198,14 +198,14 @@ router.post('/edit-user/:id', function (req, res) {
 
 
 
-// Get Delete index
+// Get Delete user
 
-router.get('/delete-page/:id', function (req, res) {
-    Page.findByIdAndRemove(req.params.id, function (err) {
+router.get('/delete-user/:id', function (req, res) {
+    User.findByIdAndRemove(req.params.id, function (err) {
         if (err) return console.log(err);
 
-        req.flash('success', 'Page Deleted Successfully!');
-        res.redirect('/admin/pages/');
+        req.flash('success', 'User Deleted Successfully!');
+        res.redirect('/admin/users/');
 
     });
 });

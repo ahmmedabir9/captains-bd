@@ -1,9 +1,9 @@
 .sorting tr:not(.home) {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .ui-state-highlight {
-    border: 1px dashed #ccc;
+  border: 1px dashed #ccc;
 }
 
 #imgPreview {
@@ -22,7 +22,7 @@ ul.gallery {
 .label {
   display: inline;
   padding: .2em .6em .3em;
-  font-size: 40%;
+  font-size: 60%;
   font-weight: 700;
   line-height: 1;
   color: #fff;
@@ -31,7 +31,6 @@ ul.gallery {
   vertical-align: super;
   border-radius: .50em;
 }
-
 
 ul.gallery li {
   margin: 20px;
@@ -44,160 +43,194 @@ table.alignmiddle td {
 }
 
 body {
-    padding-top: 56px;
-  }
-  
-  
-  /*
+  padding-top: 56px;
+}
+
+/*
    * Global add-ons
    */
-  
-  .sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  /*
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
    * Top navigation
    * Hide default border to remove 1px line.
    */
-  .navbar-fixed-top {
-    border: 0;
-    border-bottom: 1px solid #555;
-  }
-  
-  /*
+
+.navbar-fixed-top {
+  border: 0;
+  border-bottom: 1px solid #555;
+}
+
+/*
    * Sidebar
    */
-  
+
+.sidebar {
+  position: fixed;
+  top: 47px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+  background-color: #222;
+  box-shadow: 0px 6px 8px #888888;
+}
+
+@media (max-width: 500px) {
   .sidebar {
-      position: fixed;
-      top: 47px;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
-      display: block;
-      padding: 20px;
-      overflow-x: hidden;
-      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-      background-color: #222;
-      box-shadow: 0px 6px 8px #888888;
+    position: relative;
+    top: 0;
+    background-color: rgb(230, 230, 230);
+    text-align: center;
+    background-size: cover;
+    padding: 0;
+    border-radius: 5px;
+    box-shadow: none;
   }
-
-
-
-  @media (max-width: 500px) {
-    .sidebar {
-      position: relative;
-      top: 0;
-      background-color: rgb(230, 230, 230);
-      text-align: center;
-      background-size: cover;
-      padding: 0;
-      border-radius: 5px;
-      box-shadow: none;
-    }
-
-    .nav-sidebar {
-      display: block;
-      padding: 15px;
-    } 
-
-    .mobile-disable {
-      display: none;
-    }
-
-    .nav-sidebar > li > a {
-
-      background-color: #00111f;
-      margin: 4px;
-      border-radius: 5px;
-    } 
-
-    .nav-sidebar > li > a:hover {
-      color: rgb(255, 255, 255) !important;
-      background-color: #00111f !important;
-    }
-  }
-  
-  /* Sidebar navigation */
   .nav-sidebar {
-    margin-right: -21px;
-    margin-bottom: 20px;
-    margin-left: -20px;
+    display: block;
+    padding: 15px;
   }
-  .nav-sidebar > li > a {
-
-    color: rgb(235, 235, 235);
-    padding-right: 10px;
-    padding-left: 20px;
-  } 
-
-  .nav-sidebar > li > a:hover {
-    color: rgb(255, 255, 255);
+  .mobile-disable {
+    display: none;
+  }
+  .nav-sidebar>li>a {
     background-color: #00111f;
-
-    box-shadow: 0px 2px 6px #414141;
-    transform: scale(1.01);
-    transition: all 0.2s ease;
+    margin: 4px;
+    border-radius: 5px;
   }
-  
-  
-  /*
+  .nav-sidebar>li>a:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #00111f !important;
+  }
+}
+
+/* Sidebar navigation */
+
+.nav-sidebar {
+  margin-right: -21px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.nav-sidebar>li>a {
+  color: rgb(235, 235, 235);
+  padding-right: 10px;
+  padding-left: 20px;
+}
+
+.nav-sidebar>li>a:hover {
+  color: rgb(255, 255, 255);
+  background-color: #00111f;
+  box-shadow: 0px 2px 6px #414141;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+/*
    * Main content
    */
-  
-  /* .main {
+
+/* .main {
     
     padding-right: 40px;
     padding-left: 40px;
   } */
-  @media (max-width: 768px) {
-    .main {
-      padding-right: 40px;
-      padding-left: 40px;
-      margin-left: 150px;
-    }
-  }
 
-  @media (max-width: 500px) {
-    .main {
-      margin-left: 0px;
-    }
+@media (max-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-left: 150px;
   }
+}
 
-  .main  {
-    margin-top: 10px;
+@media (max-width: 500px) {
+  .main {
+    margin-left: 0px;
   }
+}
 
-  .page-header {
-    margin: 6px;
-    display: block;
-  }
+.main {
+  margin-top: 10px;
+}
 
-  .alert {
-    margin: 0 !important;
-    padding: 10px !important;
-    margin-top: 8px !important;
-    font-size: 11px !important;
-  }
-  
-  
-  /*
+.page-header {
+  margin: 6px;
+  display: block;
+}
+
+.alert {
+  margin: 0 !important;
+  padding: 10px !important;
+  margin-top: 8px !important;
+  font-size: 11px !important;
+}
+
+/*
    * Placeholder dashboard ideas
    */
-  
-  .placeholders {
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  .placeholders h4 {
-    margin-bottom: 0;
-  }
-  .placeholder {
-    margin-bottom: 20px;
-  }
-  .placeholder img {
-    display: inline-block;
-    border-radius: 50%;
-  }
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.placeholders h4 {
+  margin-bottom: 0;
+}
+
+.placeholder {
+  margin-bottom: 20px;
+}
+
+.placeholder h1 {
+  display: inline-block;
+  font-size: 100px;
+}
+
+.color-1, .color-2, .color-3, .color-4 {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  margin: 2px auto;
+}
+
+.color-1 {
+  background: #2c98f0;
+}
+
+.color-2 {
+  background: #ec5453;
+}
+
+.color-3 {
+  background: #f9bf3f;
+}
+
+.color-4 {
+  background: #a84cb8;
+}
+
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.sel {
+  display: inline !important;
+  width: max-content !important;
+}
+
+table.alignmiddle td {
+  vertical-align: middle !important;
+}

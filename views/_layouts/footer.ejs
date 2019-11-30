@@ -2,10 +2,10 @@
   <div class="container" style="padding-bottom: 10px;">
     <!-- Example row of columns -->
     <div class="row">
-      
-      <div class="col-md-4 col-sm-4 col-xs-6 mobile-disable">
+
+      <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="footer-widget">
-          <h3>Categories</h3>
+          <h4>Categories</h4>
           <div class="footer-widget-content">
             <% categories.forEach(function(c) { %>
             <a class="contact-link" href="/products/<%= c.slug %>"><%= c.title %></a>
@@ -13,40 +13,43 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-6">
+      <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="footer-widget">
-          <h3>Quick Links</h3>
+          <h4>Quick Links</h4>
           <div class="footer-widget-content">
             <a class="contact-link" href="/cart/checkout">My Cart</a>
+            <% if (user) { %>
             <a class="contact-link" href="/users/account">My Account</a>
+            <% } else { %>
+            <a class="contact-link" href="/users/login">Register</a>
+            <a class="contact-link" href="/users/register">Register</a>
+            <% } %>
             <a class="contact-link" href="/about">About us</a>
             <a class="contact-link" href="/contact">Contact</a>
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-6">
-          <div class="footer-widget">
-            <h3>Stay in touch</h3>
-            <div class="footer-widget-content">
-              <a href="mailto:sales@example.com" class="contact-link">sales@example.com</a>
-              <a href="mailto:support@example.com" class="contact-link red"> support@example.com </a>
-              <a href="tel:0121234" class="contact-link">(123) 456-789</a>
-              <div class="footer-social">
-                <ul class="social">
-                  <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-              </div>
-            </div>
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="footer-widget">
+          <h4>Stay in touch</h4>
+          <div class="footer-widget-content">
+            <a href="mailto:shakilcaptainsshopbd@gmail.com" class="contact-link">shakilcaptainsshopbd@gmail.com</a>
+            <a href="mailto:ridoycaptainsshopbd@gmail.com" class="contact-link"> ridoycaptainsshopbd@gmail.com </a>
+            <a href="tel:+8801715894733" class="contact-link red">+8801715894733</a>
+            <a href="tel:+8801719744869" class="contact-link red">+8801719744869</a>
+            <p class="social"><a href="#"><i class="fab fa-facebook-square"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a></p>
           </div>
         </div>
+      </div>
     </div>
   </div>
 
 </div>
 
 <div class="container footer-text">
-    <p class="text-muted"  style="float: right;">Designed & Developed by &copy; <a target="_blank" href="http://ahmmedabir.me">Bohemian Rhapsody</a></p>
+  <p class="text-muted" style="float: right;">Designed & Developed by &copy; <a target="_blank"
+      href="http://ahmmedabir.me">Bohemian Rhapsody</a></p>
   <p class="text-muted">&copy; 2019 Captain's Shop BD.</p>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

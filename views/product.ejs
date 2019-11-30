@@ -39,14 +39,20 @@
         <h3 class="page-header product-header"><%= p.title %></h3>
         <p><%= p.category %></p>
         <p><%= p.desc %></p>
-        <p><b>Price: </b><%= parseFloat(p.price).toFixed(2) %><b>৳</b></p>
+        <%  if (p.discount_price && p.discount_price != "0") { %>
+        <h5>Price: <del style="color: brown;"><%= parseFloat(p.price).toFixed(2) %><b>৳</b></del>
+          <%= parseFloat(p.discount_price).toFixed(2) %><b>৳</b></h5>
+        <% } else { %>
+        <h5>Price: <%= parseFloat(p.price).toFixed(2) %><b>৳</b></h5>
+        <% } %>
         <% if(p.size[0]!=null || p.size[1]!=null || p.size[2]!=null || p.size[3]!=null || p.size[4]!=null) { %>
         <p><b>Available Sizes: </b>
           <% for(var i=0;i<5;i++) { %>
           <% if(p.size[i]!=null) { %>
           <%= p.size[i] %> |
           <% } %>
-          <% } %><p class="text-muted">[Write the size on delivery note]</p></p>
+          <% } %><p class="text-muted">[Write the size on delivery note]</p>
+        </p>
         <% } %>
         <p>
 
@@ -67,7 +73,34 @@
           <% }); %>
         </ul>
 
+
+          <h3 class="page-header">Related Products</h3>
+
+          <% suggestion.forEach(function(p) { %>
+          <div class="col-xs-12 col-md-4 col-sm-4 col-lg-3 p-card">
+            <div class="thumbnail thumb-text">
+              <div class="inner">
+                <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
+                  <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
+                </a>
+              </div>
+              <div class="caption">
+                <h3><b><%= p.title %></b></h3>
+              </div>
+              <%  if (p.discount_price && p.discount_price != "0") { %>
+              <h4>Price: <del style="color: brown;"><%= parseFloat(p.price).toFixed(2) %><b>৳</b></del>
+                <%= parseFloat(p.discount_price).toFixed(2) %><b>৳</b></h4>
+              <% } else { %>
+              <h4>Price: <%= parseFloat(p.price).toFixed(2) %><b>৳</b></h4>
+              <% } %>
+            </div>
+          </div>
+          <% }); %>
+
+
       </div>
+
+
 
 
     </div>

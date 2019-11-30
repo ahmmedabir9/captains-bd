@@ -1,7 +1,6 @@
 <%- include('../_layouts/adminheader') %>
 
-<h1 class="page-header">Users <a href="/admin/users/add-users" class="btn btn-sm btn-info">Add a new User</a>
-</h1>
+<h1 class="page-header">Users </h1>
 <br><br>
 
 
@@ -20,10 +19,17 @@
             <td><%= user.name %><% if(user.admin == 1) { %>
                 <span class="label label-warning">Admin</span>
                 <% } %></td>
-            <td><a class="btn btn-xs btn-primary" href="/admin/users/edit-user/<%= user._id %>">Edit</a>
+            <td>
+                <%  if (user.username != "captainabir") { %>
+                <a class="btn btn-xs btn-primary" href="/admin/users/edit-user/<%= user._id %>">Edit</a>
+                <% } %>
             </td>
-            <td><a class="confirmDeletion btn btn-xs btn-danger"
-                    href="/admin/products/delete-product/<%= user._id %>">Delete</a></td>
+            <td>
+                <%  if (user.admin == "0") { %>
+                <a class="confirmDeletion btn btn-xs btn-danger"
+                    href="/admin/users/delete-user/<%= user._id %>">Delete</a>
+                <% } %>
+            </td>
         </tr>
         <% }); %>
     </tbody>
