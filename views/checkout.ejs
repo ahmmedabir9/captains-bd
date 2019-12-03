@@ -2,15 +2,28 @@
 
 
 <% if (typeof cart != "undefined") { %>
+
 <div class="container" style="margin-bottom: 20px;">
+
+
+  <!-- Breadcrumb Links -->
+
 
   <ol class="breadcrumb" style="margin-top: 15px;">
     <li><a href="/">Home</a></li>
     <li class="active">Checkout</li>
   </ol>
-  <div class="row">
-    <div class="col-md-6 order-md-2 mb-4">
 
+
+
+  <div class="row">
+
+
+
+    <!-- Cart Section -->
+
+
+    <div class="col-md-6 order-md-2 mb-4">
       <h2 class="page-header">My Cart</h2>
       <br>
       <div class="table-responsive">
@@ -31,7 +44,7 @@
           <tr>
             <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
             <td><%= product.title %></td>
-            <td><%= product.price %></td>
+            <td><%= product.price %> <b>৳</b></td>
             <td><%= product.qty %></td>
             <td>
               <a class="btn btn-xs btn-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
@@ -39,24 +52,28 @@
 
               <a class="btn btn-xs btn-danger" href="/cart/update/<%= product.title %>?action=clear">Clear</a>
             </td>
-            <td><%= sub %></td>
+            <td><%= sub %> <b>৳</b></td>
           </tr>
 
           <% }); %>
 
           <tr>
-            <td colspan="3" align="">
+
+            <td colspan="3">
               <a href="/cart/clear" class="btn btn-danger btn-sm clearcart">Clear Cart</a>
             </td>
-            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %> + Shipping</td>
 
+            <td colspan="6" align="right"><b>Total: </b><%= parseFloat(total).toFixed(2) %> <b>৳</b> + Shipping</td>
+
+          </tr>
         </table>
-
       </div>
-
-
-
     </div>
+
+
+
+    <!-- Billing Details Section -->
+
     <div class="col-md-6 order-md-1">
       <h4 class="page-header">Billing Details</h4>
       <form method="post" action="/cart/checkout" enctype="multipart/form-data">
@@ -75,11 +92,13 @@
             value=<%= user.email %> <% } %> required>
         </div>
 
+
         <div class="form-group">
           <label for="">Mobile Number</label>
           <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" <% if (user) { %>
             value=<%= user.mobile %> <% } %> required>
         </div>
+
 
         <div class="form-group">
           <label for="">District</label>
@@ -96,6 +115,7 @@
             placeholder="Shipping Address"><% if (user) { %><%= user.address %> <% } %></textarea>
         </div>
 
+
         <div class="form-group">
           <label for="">Payment Method</label>
           <div class="custom-control custom-radio">
@@ -106,6 +126,12 @@
           <div class="custom-control custom-radio">
             <input id="bkash" name="payment_method" value="bkash" type="radio" class="custom-control-input" required>
             <label class="custom-control-label" for=>Bkash</label>
+          </div>
+          <div class="bkash-note">
+            <p>For Bkash Payment</p>
+            <p>- Go to Send Money Option of your bKash menu</p>
+            <p>- Send Money to our bKash Personal Number [01719744869]</p>
+            <p>- Use Your Order ID as Referance(You will get the order id after placing order)</p>
           </div>
         </div>
 
@@ -130,6 +156,11 @@
 
 <% } else { %>
 
+
+
+<!-- Empty Cart -->
+
+
 <div class="section c-slide hero-image">
   <div class="hero-text">
     <h1 style="font-size:60px">Your Cart is Empty!</h1>
@@ -137,6 +168,10 @@
   </div>
 </div>
 <% } %>
+
+
+
+
 
 
 <script>

@@ -1,18 +1,34 @@
 <% include _layouts/header %>
 
+
+<div class="container">
+
+  <!-- Breadcrumb Links -->
+
+  <ol class="breadcrumb" style="margin: 15px;">
+    <li><a href="/">Home</a></li>
+    <li class="active">Login</li>
+  </ol>
+</div>
+
+
+
+<!-- Login Form -->
+
+
 <div class="container form-signin">
-  <h1 class="page-header"><%= title %>
-  </h1>
+
+  <h1 class="page-header"><%= title %></h1>
 
 
   <form method="post" action="/users/login">
-
 
 
     <div class="form-group">
       <label for="">Username</label>
       <input type="text" class="form-control" name="username" placeholder="Username" required>
     </div>
+
 
     <div class="form-group">
       <label for="">Password</label>
@@ -23,7 +39,8 @@
     <button class="btn btn-info btn-block">Log in</button>
 
 
-    <p class="simple-link">New User? <a href="/users/register" >Sign Up</a></p>
+    <p class="simple-link">New User? <a href="/users/register">Sign Up</a></p>
+
 
   </form>
 </div>

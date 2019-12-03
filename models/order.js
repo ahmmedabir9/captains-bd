@@ -41,6 +41,9 @@ var OrderSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    date: {
+        type: String,
+    },
     status: {
         type: Number,
         required: true

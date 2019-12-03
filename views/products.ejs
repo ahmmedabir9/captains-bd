@@ -1,6 +1,11 @@
 <% include _layouts/header %>
 
 <div class="container c-slide">
+
+
+  <!-- Breadcrumb Links -->
+
+
   <ol class="breadcrumb" style="margin-top: 15px;">
     <li><a href="/">Home</a></li>
     <li class="active">Products</li>
@@ -10,6 +15,9 @@
 
   <div class="row">
 
+
+
+    <!-- Side Category Menu -->
 
 
     <div class="col-xs-12 col-md-3 sidemenu">
@@ -24,6 +32,7 @@
 
 
 
+    <!-- All Products -->
 
     <div class="col-xs-12 col-md-8 p">
 
@@ -36,6 +45,11 @@
 
 
         <% products.forEach(function(p) { %>
+
+
+        <!-- Product Card -->
+
+
         <div class="col-xs-12 col-md-4 col-sm-4 col-lg-3 p-card">
           <div class="thumbnail thumb-text">
             <div class="inner">
@@ -68,12 +82,13 @@
             <% } %>
           </div>
         </div>
+
+
+
         <% }); %>
       </div>
     </div>
   </div>
-
-
 </div>
 
 

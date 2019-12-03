@@ -17,7 +17,6 @@ router.get('/add/:product', function (req, res) {
     var slug = req.params.product;
     var size = req.body.size;
 
-    console.log(slug);
 
 
     Product.findOne({ slug: slug }, function (err, p) {
@@ -153,6 +152,11 @@ var c_mobile;
 var c_address;
 var c_amount;
 var c_shipping;
+var o_date;
+var c_note;
+var c_pay;
+var o_id;
+var item;
 
 // Post Checkout Page
 
@@ -173,6 +177,12 @@ router.post('/checkout', function (req, res) {
     var payment_method = req.body.payment_method;
     var note = req.body.note;
     var user = null;
+    
+    o_id = null;
+
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     if (req.body.user) user = req.body.user;
 
     if (district == "dhaka") shipping_cost = 50;
@@ -186,6 +196,10 @@ router.post('/checkout', function (req, res) {
     c_address = address;
     c_amount = amount;
     c_shipping = shipping_cost;
+    o_date = date;
+    c_note = note;
+    c_pay = payment_method;
+    item = req.session.cart;
 
     console.log(amount);
 
@@ -223,12 +237,15 @@ router.post('/checkout', function (req, res) {
             note: note,
             cart: cart,
             user: user,
+            date: date,
             status: 0
         });
 
         order.save(function (err) {
             if (err) return console.log(err);
 
+
+            o_id = order._id;
 
             req.flash('success', 'Order Placed!');
             res.redirect('/cart/order-details');
@@ -247,7 +264,6 @@ router.get('/order-details', function (req, res) {
 
 
 
-    var item = req.session.cart;
     var am = parseInt(c_amount);
     var sh = parseInt(c_shipping);
     var bill = parseFloat(am + sh).toFixed(2);
@@ -256,10 +272,11 @@ router.get('/order-details', function (req, res) {
     delete req.session.cart;
 
 
-    if (item) {
+    if (o_id) {
         res.render('order_details', {
 
             title: 'Order Confirmation',
+            id: o_id,
             cart: item,
             name: c_name,
             email: c_email,
@@ -267,7 +284,10 @@ router.get('/order-details', function (req, res) {
             address: c_address,
             amount: c_amount,
             shipping_cost: c_shipping,
-            bill: bill
+            bill: bill,
+            date: o_date,
+            note: c_note,
+            payment: c_pay
         });
     }
 

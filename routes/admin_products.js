@@ -283,6 +283,10 @@ router.post('/edit-product/:id', function (req, res) {
                     if (discount_price) {
                         p.discount_price = parseFloat(discount_price).toFixed(2);
                     }
+                    else
+                    {
+                        p.discount_price = null;
+                    }
 
 
                     if (imageFile != "") {

@@ -1,51 +1,116 @@
 <% include _layouts/header %>
 
-<div class="container bill">
-  <div class="container">
-    <h2 class="page-header">Order Details</h2>
+<div class="container">
 
-    <div class="col-md-6">
-      <p><b>Customer Name: </b><%= name %></p>
-      <p><b>Customer Email: </b><%= email %></p>
-      <p><b>Customer Mobile: </b><%= mobile %></p>
-      <p><b>Customer Address: </b><%= address %></p>
+  <!-- Breadcrumb Links -->
+
+  <ol class="breadcrumb" style="margin: 15px;">
+    <li><a href="/">Home</a></li>
+    <li class="active">Order Confirmation</li>
+  </ol>
+
+  <div class="row">
+
+
+    <!-- Order Details -->
+
+    <div class="col-md-5 col-sm-12 col-xs-12">
+
+
+      <h2 class="page-header">Order Details</h2>
+
+      <div class="table-responsive">
+        <table class="table alignmiddle">
+          <tr>
+            <td><b>Order ID: </b></td>
+            <td><%= id %></td>
+          </tr>
+          <tr>
+            <td><b>Customer Name: </b></td>
+            <td><%= name %></td>
+          </tr>
+          <tr>
+            <td><b>Customer Email: </b></td>
+            <td><%= email %></td>
+          </tr>
+          <tr>
+            <td><b>Customer Mobile: </b></td>
+            <td><%= mobile %></td>
+          </tr>
+          <tr>
+            <td><b>Shipping Address: </b></td>
+            <td><%= address %></td>
+          </tr>
+          <tr>
+            <td><b>Order Date: </b></td>
+            <td><%= date %></td>
+          </tr>
+          <tr>
+            <td><b>Payment Method: </b></td>
+            <td><%= payment %>
+              <% if (payment=="bkash") { %>
+              <p style="color: crimson;">*Use Your Order ID as Referance*</p>
+              <% } %>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Total Amount: </b></td>
+            <td><%= amount %> Taka</td>
+          </tr>
+          <tr>
+            <td><b>Shipping Cost: </b></td>
+            <td><%= shipping_cost %> Taka</td>
+          </tr>
+          <tr>
+            <td><b>Total Bill: </b></td>
+            <td><%= bill %> Taka</td>
+          </tr>
+          <tr>
+            <td><b>Delivery Note: </b></td>
+            <td><%= note %></td>
+          </tr>
+
+        </table>
+      </div>
     </div>
-    <div class="col-md-6">
-      <p><b>Total Amount: </b><%= amount %></p>
-      <p><b>Shipping Cost: </b><%= shipping_cost %></p>
-      <p><b>Total Bill: </b><%= bill %></p>
+
+
+
+    <!-- Items Section -->
+
+    <div class="col-md-7 col-sm-12 col-xs-12">
+
+      <h2 class="">Items</h2>
+      <br>
+      <div class="table-responsive">
+        <table class="table alignmiddle">
+          <tr>
+            <th>Images</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+
+          <% cart.forEach(function(product) { %>
+          <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+          <tr>
+            <td><img src="<%= product.image %>" alt="" style="width: 40px;"></td>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td><%= product.qty %></td>
+            <td><%= sub %></td>
+          </tr>
+
+          <% }); %>
+        </table>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="container">
-    <h2 class="">Items</h2>
-    <br>
-    <div class="table-responsive">
-      <table class="table alignmiddle">
-        <tr>
-          <th>Images</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-        </tr>
-
-        <% cart.forEach(function(product) { %>
-        <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
-        <tr>
-          <td><img src="<%= product.image %>" alt="" style="width: 80px;"></td>
-          <td><%= product.title %></td>
-          <td><%= product.price %></td>
-          <td><%= product.qty %></td>
-          <td><%= sub %></td>
-        </tr>
-
-        <% }); %>
-      </table>
-
-    </div>
-  </div>
-</div>
 </div>
 
 

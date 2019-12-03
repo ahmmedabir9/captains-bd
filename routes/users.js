@@ -131,7 +131,7 @@ router.get('/profile/:id', isUser, function (req, res) {
                 user: res.locals.user,
                 orders: orders
             });
-        });
+        }).sort({ _id: -1 });
     }
 });
 

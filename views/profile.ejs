@@ -5,6 +5,9 @@
 
 <div class="container c-slide">
 
+
+    <!-- Breadcrumb Links -->
+
     <ol class="breadcrumb" style="margin: 15px;">
         <li><a href="/">Home</a></li>
         <li class="active"><%= user.username %></li>
@@ -12,6 +15,7 @@
     <div class="container row">
 
 
+        <!-- User Details -->
 
         <div class="col-xs-12 col-md-6 user-det">
 
@@ -26,28 +30,34 @@
             <h4><b>Address: </b><%= user.address %></h4>
         </div>
 
-        <div class="col-xs-12 col-md-6">
 
+        <!-- Edit Profile -->
+
+        <div class="col-xs-12 col-md-6">
 
             <h2>Edit Profile</h2>
             <br>
             <form method="post" action="/users/profile/<%= user.id %>" enctype="multipart/form-data">
+
 
                 <div class="form-group">
                     <label for="">Name</label>
                     <input type="text" class="form-control" name="name" value="<%= user.name %>" placeholder="Name">
                 </div>
 
+
                 <div class="form-group">
                     <label for="">Email</label>
                     <input type="text" class="form-control" name="email" value="<%= user.email %>" placeholder="Email">
                 </div>
+
 
                 <div class="form-group">
                     <label for="">Mobile</label>
                     <input type="text" class="form-control" name="mobile" value="<%= user.mobile %>"
                         placeholder="Mobile">
                 </div>
+
 
                 <div class="form-group">
                     <label for="">Address</label>
@@ -59,23 +69,19 @@
 
                 <button class="btn btn-info">Update</button>
 
+
+
             </form>
-
         </div>
-
-
-
-
     </div>
-
-
-
-
 </div>
 
 
+<!-- My Orders Section -->
+
+
 <div class="container">
-    <br><br>
+    <br>
     <h2>My Orders</h2>
     <br>
     <div class="table-responsive">
@@ -86,29 +92,33 @@
                     <th>Order ID</th>
                     <th>Customer Name</th>
                     <th>Bill</th>
+                    <th>Order Date</th>
                     <th>Status</th>
-                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
                 <% orders.forEach(function(orders) { %>
+                    
                 <tr>
                     <td><%= orders._id %></td>
                     <td><%= orders.customer_name %></td>
                     <td><%= parseFloat(orders.amount + orders.shipping_cost).toFixed(2) %></td>
+                    <td><%= orders.date %></td>
                     <td>
                         <%  if (orders.status == "0") { %>
-                        On Hold
-                        <% } else { %>
-                        Confirmed
+                        <span class="label label-warning">On Hold</span>
+                        <% } else if(orders.status == "1") { %>
+                        <span class="label label-danger">Cancelled</span>
+                        <% } else if(orders.status == "2") { %>
+                        <span class="label label-info">Confirmed</span>
+                        <% } else if(orders.status == "3") { %>
+                        <span class="label label-success">Completed</span>
                         <% } %>
                     </td>
-                    <td><a class="btn btn-xs btn-primary" href="/admin/orders/order-details/<%= orders._id %>">View</a>
-                    </td>
                 </tr>
+
                 <% }); %>
             </tbody>
-
         </table>
     </div>
 </div>

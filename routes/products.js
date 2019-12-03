@@ -59,36 +59,38 @@ router.get('/:category/:product', function (req, res) {
     var productSlug = req.params.product;
 
 
-    Product.find({ category: categorySlug, slug: { '$ne': productSlug } }, function (err, s) {
-        if (err) console.log(err);
-
-        suggestion = s;
-
-
-    }).sort({ _id: -1 }).limit(4);
 
 
     Product.findOne({ slug: req.params.product }, function (err, product) {
         if (err) console.log(err);
 
         else {
-            var galleryDir = 'public/productImages/' + product._id + '/gallery';
 
-            fs.readdir(galleryDir, function (err, files) {
+            Product.find({ category: categorySlug, slug: { '$ne': productSlug } }, function (err, s) {
                 if (err) console.log(err);
 
-                else {
-                    galleryImages = files;
+                suggestion = s;
 
-                    res.render('product', {
-                        title: product.title,
-                        p: product,
-                        galleryImages: galleryImages,
-                        suggestion: suggestion
-                    });
-                }
 
-            });
+                var galleryDir = 'public/productImages/' + product._id + '/gallery';
+
+                fs.readdir(galleryDir, function (err, files) {
+                    if (err) console.log(err);
+
+                    else {
+                        galleryImages = files;
+
+                        res.render('product', {
+                            title: product.title,
+                            p: product,
+                            galleryImages: galleryImages,
+                            suggestion: suggestion
+                        });
+                    }
+
+                });
+
+            }).sort({ _id: -1 }).limit(4);
         }
 
     });

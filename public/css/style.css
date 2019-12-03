@@ -37,6 +37,11 @@ table.alignmiddle td {
     padding: auto !important;
 }
 
+.breadcrumb a {
+    text-decoration: none;
+    color: #000;
+}
+
 .thumb-text {
     text-align: center;
     padding: 0 0 0 0 !important;
@@ -427,4 +432,10 @@ li {
 
 .colo-2 {
     background: #a84cb8;
+}
+
+.bkash-note {
+    color: #ec5453;
+    border: 1px solid #eee;
+    font-weight: bold;
 }

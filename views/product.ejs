@@ -2,17 +2,25 @@
 
 
 
-
 <div class="container c-slide">
+
+
+  <!-- Breadcrumb Links -->
 
   <ol class="breadcrumb" style="margin: 15px;">
     <li><a href="/">Home</a></li>
     <li><a href="/products">Products</a></li>
     <li class="active"><%= p.title %></li>
   </ol>
-  <div class="container row">
-    <div class="col-xs-12 col-md-3 sidemenu">
 
+
+
+  <div class="container row">
+
+
+    <!-- Side Category Menu -->
+
+    <div class="col-xs-12 col-md-3 sidemenu">
       <h3>Categories</h3>
       <div class="btn-group-vertical" role="group" aria-label="...">
         <a class="btn btn-info" href="/products">All Products</a>
@@ -23,16 +31,17 @@
     </div>
 
 
+
+    <!-- Product Details Section -->
+
+
     <div class="col-xs-12 col-md-9 p">
-
-
 
       <div class="col-xs-12 col-md-7">
         <div class="pimg">
           <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="spi">
         </div>
         <br>
-
       </div>
 
       <div class="col-xs-12 col-md-5">
@@ -56,11 +65,19 @@
         <% } %>
         <p>
 
+
           <a class="btn btn-sm btn-info btn-block" href="/cart/add/<%= p.slug %>">Add to Cart</a>
+
+
         </p>
       </div>
 
+
       <div class="col-xs-12 col-md-12">
+
+
+        <!-- Product Image Gallery -->
+
         <ul class="gallery">
           <% galleryImages.forEach(function(image) { %>
           <% if (image != "thumbs") { %>
@@ -74,41 +91,32 @@
         </ul>
 
 
-          <h3 class="page-header">Related Products</h3>
+        <!-- Related Products Section -->
 
-          <% suggestion.forEach(function(p) { %>
-          <div class="col-xs-12 col-md-4 col-sm-4 col-lg-3 p-card">
-            <div class="thumbnail thumb-text">
-              <div class="inner">
-                <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
-                  <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
-                </a>
-              </div>
-              <div class="caption">
-                <h3><b><%= p.title %></b></h3>
-              </div>
-              <%  if (p.discount_price && p.discount_price != "0") { %>
-              <h4>Price: <del style="color: brown;"><%= parseFloat(p.price).toFixed(2) %><b>৳</b></del>
-                <%= parseFloat(p.discount_price).toFixed(2) %><b>৳</b></h4>
-              <% } else { %>
-              <h4>Price: <%= parseFloat(p.price).toFixed(2) %><b>৳</b></h4>
-              <% } %>
+        <h3 class="page-header">Related Products</h3>
+        <% suggestion.forEach(function(p) { %>
+        <div class="col-xs-12 col-md-4 col-sm-4 col-lg-3 p-card">
+          <div class="thumbnail thumb-text">
+            <div class="inner">
+              <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
+                <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
+              </a>
             </div>
+            <div class="caption">
+              <h3><b><%= p.title %></b></h3>
+            </div>
+            <%  if (p.discount_price && p.discount_price != "0") { %>
+            <h4>Price: <del style="color: brown;"><%= parseFloat(p.price).toFixed(2) %><b>৳</b></del>
+              <%= parseFloat(p.discount_price).toFixed(2) %><b>৳</b></h4>
+            <% } else { %>
+            <h4>Price: <%= parseFloat(p.price).toFixed(2) %><b>৳</b></h4>
+            <% } %>
           </div>
-          <% }); %>
-
-
+        </div>
+        <% }); %>
       </div>
-
-
-
-
     </div>
   </div>
-
-
-
-
 </div>
 
 
