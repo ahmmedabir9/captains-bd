@@ -3,24 +3,33 @@
 <h1 class="page-header">Dashboard</h1>
 
 <div class="row placeholders">
+
+
+  <!-- Total Products -->
   <div class="col-xs-12 col-sm-3 placeholder">
     <div class="color-4">
       <h1><%= total_products %></h1>
     </div>
     <h4>Total Products</h4>
   </div>
+
+  <!-- Waiting Orders -->
   <div class="col-xs-12 col-sm-3 placeholder">
     <div class="color-1">
       <h1><%= waiting %></h1>
     </div>
     <h4>Waiting Orders</h4>
   </div>
+
+  <!-- Cancelled Orders -->
   <div class="col-xs-12 col-sm-3 placeholder">
     <div class="color-2">
       <h1><%= cancelled %></h1>
     </div>
     <h4>Cancelled Orders</h4>
   </div>
+
+  <!-- Completed Orders -->
   <div class="col-xs-12 col-sm-3 placeholder">
     <div class="color-3">
       <h1><%= completed %></h1>
@@ -29,7 +38,11 @@
   </div>
 </div>
 
+
 <div class="row">
+
+
+  <!-- Last Waiting Orders -->
   <h2 class="sub-header">Last Waiting Orders</h2>
   <div class="table-responsive">
     <table class="table table-striped">
