@@ -10,6 +10,7 @@
             <tr class="home">
                 <th>Order ID</th>
                 <th>Customer Name</th>
+                <th>Order Date</th>
                 <th>Bill</th>
                 <th>Status</th>
                 <th>View</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td><%= orders._id %></td>
                 <td><%= orders.customer_name %></td>
+                <td><%= orders.date %></td>
                 <td><%= parseFloat(orders.amount + orders.shipping_cost).toFixed(2) %></td>
                 <td>
                     <%  if (orders.status == "0") { %>
