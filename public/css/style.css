@@ -110,13 +110,13 @@ table.alignmiddle td {
 }
 
 .hero {
-    background-image: url("/cover/site-ad.png");
+    background-image: url("/cover/site-ad.jpg");
     background-position: center;
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 350px;
+    height: 750px;
     margin-top: 20px;
 }
 
