@@ -66,7 +66,7 @@ router.post('/register', function (req, res) {
                     password: password,
                     address: address,
                     mobile: mobile,
-                    admin: 1
+                    admin: 0
                 });
 
                 bcrypt.genSalt(10, function (err, salt) {

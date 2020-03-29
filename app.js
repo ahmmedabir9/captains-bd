@@ -10,23 +10,16 @@ var passport = require("passport");
 
 //Connection to DB
 mongoose
-  .connect(
-    "mongodb+srv://captainabir:AXAjXLtNkFdN9weA@cluster0-ecxlb.mongodb.net/test?retryWrites=true&w=majority/captainsdb",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  )
+  .connect(config.database, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("DB Connected");
   });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 
-
-//AXAjXLtNkFdN9weA
-
-//Init app
 
 var app = express();
 
