@@ -146,7 +146,7 @@ app.use("/cart", cart);
 app.use("/orders", orders);
 
 //start the server
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 app.listen(port, function() {
   console.log("Server Started on Port " + port);
 });

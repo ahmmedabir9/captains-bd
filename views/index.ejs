@@ -7,14 +7,14 @@
 
   <div class="carousel-inner" role="listbox">
     <div class="item active ">
-      <img class="first-slide head-cover" src="/cover/cover-1.jpg" alt="First slide">
+      <img class="first-slide head-cover" src="/cover/cover-1.jpeg" alt="First slide">
     </div>
-    <div class="item">
+    <!-- <div class="item">
       <img class="second-slide head-cover" src="/cover/cover-2.jpg" alt="Second slide">
     </div>
     <div class="item">
       <img class="third-slide head-cover" src="/cover/cover-3.jpg" alt="Third slide">
-    </div>
+    </div> -->
   </div>
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -39,7 +39,9 @@
     <h1>Featured Products!</h1>
   </div>
   <div class="row">
-    <% products.forEach(function(p) { %>
+
+    <% let id = 453 %>
+    <% products.forEach(function(p, id) { %>
     <% if(p.featured == 1) { %>
 
     <!-- Featured Product Card -->
@@ -47,7 +49,7 @@
     <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 f-card">
       <div class="f-thumb">
         <div class="inner">
-          <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="f-image">
+          <img src="https://picsum.photos/id/<%= id++ %>/600/600" alt="" class="f-image">
         </div>
         <div class="caption-overlay">
           <div class="f-text">
@@ -77,9 +79,9 @@
 <!-- Site Ad Hero Section -->
 
 
-<div class="hero"></div>
+<!-- <div class="hero"></div>
 
-
+ -->
 
 
 
@@ -91,7 +93,8 @@
     <h1>New Arrival!</h1>
   </div>
   <div class="row">
-    <% latest.forEach(function(p) { %>
+    <% let ids = 453 %>
+    <% latest.forEach(function(p, ids) { %>
 
 
 
@@ -101,7 +104,7 @@
       <div class="thumbnail thumb-text">
         <div class="inner">
           <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
-            <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
+            <img src="https://picsum.photos/id/<%= ids++ %>/200" alt="" class="card-img-top">
           </a>
         </div>
         <div class="caption">

@@ -39,7 +39,7 @@
 
       <div class="col-xs-12 col-md-7">
         <div class="pimg">
-          <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="spi">
+          <img src="https://picsum.photos/400" alt="" class="spi">
         </div>
         <br>
       </div>
@@ -79,14 +79,14 @@
         <!-- Product Image Gallery -->
 
         <ul class="gallery">
-          <% galleryImages.forEach(function(image) { %>
-          <% if (image != "thumbs") { %>
+          <% [100, 200, 300].forEach(function(id) { %>
+          
           <li>
-            <a data-fancybox="gallery" href="/productImages/<%= p.id %>/gallery/<%= image %>">
-              <img class="gimg" src="/productImages/<%= p.id %>/gallery/thumbs/<%= image %>" alt="">
+            <a data-fancybox="gallery" href="https://picsum.photos/id/<%= id %>/200/200">
+              <img class="gimg" src="https://picsum.photos/id/<%= id %>/200/200" alt="">
             </a>
           </li>
-          <% } %>
+         
           <% }); %>
         </ul>
 
@@ -99,7 +99,7 @@
           <div class="thumbnail thumb-text">
             <div class="inner">
               <a href="/products/<%= p.category %>/<%= p.slug %>" class="pa">
-                <img src="/productImages/<%= p.id %>/<%= p.image %>" alt="" class="card-img-top">
+                <img src="https://picsum.photos/id/130/200/200" alt="" class="card-img-top">
               </a>
             </div>
             <div class="caption">
